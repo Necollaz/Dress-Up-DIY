@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags: []
   layers:
   - Default
@@ -41,3 +41,29 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3682968677
+    locked: 0
+  - name: Character
+    uniqueID: 556988775
+    locked: 0
+  - name: Environment
+    uniqueID: 3093884703
+    locked: 0
+  - name: Makeup
+    uniqueID: 3886118723
+    locked: 0
+  - name: Props
+    uniqueID: 1174521223
+    locked: 0
+  - name: Hand
+    uniqueID: 1993180761
+    locked: 0
+  - name: Overlay
+    uniqueID: 3590120963
+    locked: 0
+  - name: Effects
+    uniqueID: 165264143
+    locked: 0
+  m_RenderingLayers:
+  - Default

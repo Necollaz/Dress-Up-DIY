@@ -1,10 +1,11 @@
 fileFormatVersion: 2
-guid: 42f19959a30bdf342aa893fa849f4778
+guid: 68ebcaa670de2d542862d3001aecaa69
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4745368246693064438
-    second: "\u043C\u0435\u0439\u043A_0"
+      213: -8065349513040393560
+    second: "\u0432\u043A\u043B\u0430\u0434\u043A\u0438 \u0434\u043B\u044F \u043C\u0435\u0439\u043A\u0430\u043F\u0430
+      (1)_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,12 +101,12 @@ TextureImporter:
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: 47
+    textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 1
+    overridden: 0
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
@@ -113,13 +114,14 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u043C\u0435\u0439\u043A_0"
+      name: "\u0432\u043A\u043B\u0430\u0434\u043A\u0438 \u0434\u043B\u044F \u043C\u0435\u0439\u043A\u0430\u043F\u0430
+        (1)_0"
       rect:
         serializedVersion: 2
-        x: 314
-        y: 259
-        width: 1367
-        height: 3430
+        x: 13
+        y: 13
+        width: 723
+        height: 526
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a01117fb8b0152eb0800000000000000
-      internalID: -4745368246693064438
+      spriteID: 8aa8bd5995f121090800000000000000
+      internalID: -8065349513040393560
       vertices: []
       indices: 
       edges: []
@@ -148,7 +150,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u043C\u0435\u0439\u043A_0": -4745368246693064438
+      "\u0432\u043A\u043B\u0430\u0434\u043A\u0438 \u0434\u043B\u044F \u043C\u0435\u0439\u043A\u0430\u043F\u0430 (1)_0": -8065349513040393560
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
