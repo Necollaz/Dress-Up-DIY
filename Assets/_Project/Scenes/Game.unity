@@ -583,7 +583,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &53112627
 Transform:
   m_ObjectHideFlags: 0
@@ -925,90 +925,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &124829143
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 124829145}
-  - component: {fileID: 124829144}
-  m_Layer: 0
-  m_Name: CreamSequence
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &124829144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124829143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70419bb274c0456c930ed568bda731aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.CreamMakeupSequence
-  _mainCamera: {fileID: 519420031}
-  _handRoot: {fileID: 2082120883}
-  _handDragZone: {fileID: 1554538894}
-  _creamInHandVisual: {fileID: 495967068}
-  _creamTapZone: {fileID: 293067295}
-  _creamStandVisual: {fileID: 293067291}
-  _faceZone: {fileID: 1813440264}
-  _playerFaceStateRenderer: {fileID: 1707087836}
-  _handDefaultPoint: {fileID: 1574173970}
-  _creamPickupPoint: {fileID: 2091761818}
-  _creamDragStartPoint: {fileID: 530300174}
-  _faceApplyPoint: {fileID: 724243845}
-  _automaticMoveDuration: 0.35
-  _dragSmoothTime: 0.04
-  _creamApplyDuration: 0.35
-  _pauseAfterApplyDuration: 0.1
-  _automaticMoveCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!4 &124829145
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124829143}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.52159, y: 2.2144, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &125905603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,12 +1259,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 164385172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beb68d334c8445899dc4ec1584924b05, type: 3}
+  m_Script: {fileID: 11500000, guid: f5450150f50149aab35a68c6bde845a9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorView
-  _colorIndex: 5
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorViewNew
   _tapZone: {fileID: 164385174}
-  _colorRenderer: {fileID: 164385175}
   _brushDipPoint: {fileID: 299955217}
   _brushTipColor: {r: 0.9215687, g: 0.5764706, b: 0.5411765, a: 1}
 --- !u!1 &165041761
@@ -1627,6 +1541,39 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &205282372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 205282373}
+  m_Layer: 0
+  m_Name: Brush
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &205282373
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205282372}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 360210164}
+  - {fileID: 463579255}
+  m_Father: {fileID: 1022644142}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &207104422
 GameObject:
   m_ObjectHideFlags: 0
@@ -2261,14 +2208,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 288698377}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beb68d334c8445899dc4ec1584924b05, type: 3}
+  m_Script: {fileID: 11500000, guid: f5450150f50149aab35a68c6bde845a9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorView
-  _colorIndex: 3
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorViewNew
   _tapZone: {fileID: 288698379}
-  _colorRenderer: {fileID: 288698380}
   _brushDipPoint: {fileID: 2011176968}
-  _brushTipColor: {r: 0.87843144, g: 0.6313726, b: 0.46274513, a: 1}
+  _brushTipColor: {r: 0.87843144, g: 0.6313726, b: 0.45882356, a: 1}
 --- !u!1 &290922071
 GameObject:
   m_ObjectHideFlags: 0
@@ -2501,8 +2446,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 353314862}
-  - component: {fileID: 353314864}
   - component: {fileID: 353314863}
+  - component: {fileID: 353314864}
   m_Layer: 0
   m_Name: MakeupLipstick
   m_TagString: Untagged
@@ -2582,13 +2527,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 353314861}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 382ed22950f04cc9bd5782b54ff0cdc7, type: 3}
+  m_Script: {fileID: 11500000, guid: a5723bb7f9e848a5a10f761c3b1a1642, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.MakeupBookTabView
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.MakeupBookTabViewNew
   _pageType: 2
   _tapZone: {fileID: 353314863}
-  _inactiveTabVisual: {fileID: 395116996}
-  _activeTabVisual: {fileID: 224882598}
+  _inactiveTabRenderer: {fileID: 395116996}
+  _activeTabRenderer: {fileID: 224882598}
   _pageRoot: {fileID: 53112627}
 --- !u!1 &356705258
 GameObject:
@@ -2705,12 +2650,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360210163}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.8, y: -6, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.7999997, y: -6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1022644142}
+  m_Father: {fileID: 205282373}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &395116993
 GameObject:
@@ -3009,12 +2954,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 463579254}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1022644142}
+  m_Father: {fileID: 205282373}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &495967068
 GameObject:
@@ -3411,7 +3356,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1022644142}
+  m_Father: {fileID: 1536878221}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &531186614
 GameObject:
@@ -3422,8 +3367,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 531186615}
-  - component: {fileID: 531186617}
   - component: {fileID: 531186616}
+  - component: {fileID: 531186617}
   m_Layer: 0
   m_Name: MakeupBlush
   m_TagString: Untagged
@@ -3503,13 +3448,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 531186614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 382ed22950f04cc9bd5782b54ff0cdc7, type: 3}
+  m_Script: {fileID: 11500000, guid: a5723bb7f9e848a5a10f761c3b1a1642, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.MakeupBookTabView
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.MakeupBookTabViewNew
   _pageType: 1
   _tapZone: {fileID: 531186616}
-  _inactiveTabVisual: {fileID: 1624626535}
-  _activeTabVisual: {fileID: 1459198546}
+  _inactiveTabRenderer: {fileID: 1624626535}
+  _activeTabRenderer: {fileID: 1459198546}
   _pageRoot: {fileID: 1495616015}
 --- !u!1 &539102464
 GameObject:
@@ -3520,6 +3465,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 539102465}
+  - component: {fileID: 539102466}
   m_Layer: 0
   m_Name: CharacterRoot
   m_TagString: Untagged
@@ -3549,6 +3495,33 @@ Transform:
   - {fileID: 1813440263}
   m_Father: {fileID: 1707087835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &539102466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539102464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093a8907bac64ac09fdcc0f2ef79d115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.PlayerFaceStateView
+  _bodyWithAcneRenderer: {fileID: 2116901655}
+  _bodyClearRenderer: {fileID: 1664026880}
+  _acneRenderers:
+  - {fileID: 2142726932}
+  - {fileID: 161899842}
+  _blushRenderers:
+  - {fileID: 876985139}
+  - {fileID: 1557907252}
+  - {fileID: 1553886219}
+  - {fileID: 821942986}
+  - {fileID: 1044040091}
+  - {fileID: 2083491151}
+  - {fileID: 1773185011}
+  - {fileID: 912721357}
+  - {fileID: 1777693775}
 --- !u!1 &548773886
 GameObject:
   m_ObjectHideFlags: 0
@@ -3640,6 +3613,117 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &582399591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 582399593}
+  - component: {fileID: 582399592}
+  m_Layer: 0
+  m_Name: MakeupGameplay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &582399592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582399591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14dc2ed77754e9a844fa6a58bd276eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.MakeupGameplay
+  _mainCamera: {fileID: 519420031}
+  _makeupBookViewNew: {fileID: 663418805}
+  _playerFaceStateView: {fileID: 539102466}
+  _handConfig:
+    _handRoot: {fileID: 2082120883}
+    _brushTipPoint: {fileID: 1803199562}
+    _handDragZone: {fileID: 1554538894}
+    _creamInHandVisual: {fileID: 495967068}
+    _brushInHandRenderer: {fileID: 2098090826}
+    _brushTipRenderer: {fileID: 1803199563}
+    _handDefaultPoint: {fileID: 1574173970}
+    _defaultBrushTipColor: {r: 1, g: 1, b: 1, a: 1}
+  _motionConfig:
+    _automaticMoveDuration: 0.35
+    _dragSmoothTime: 0.04
+    _applyDuration: 0.35
+    _pauseAfterApplyDuration: 0.1
+    _brushDipAnimationStepDuration: 0.08
+    _brushDipOffset: 0.12
+    _automaticMoveCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  _creamConfig:
+    _creamTapZone: {fileID: 293067295}
+    _creamStandVisual: {fileID: 293067291}
+    _faceZone: {fileID: 1813440264}
+    _creamPickupPoint: {fileID: 2091761818}
+    _creamDragStartPoint: {fileID: 530300174}
+    _faceApplyPoint: {fileID: 724243845}
+  _blushConfig:
+    _paletteColors:
+    - {fileID: 1630051166}
+    - {fileID: 1448239950}
+    - {fileID: 1039779220}
+    - {fileID: 288698381}
+    - {fileID: 661788649}
+    - {fileID: 164385176}
+    - {fileID: 1658443564}
+    - {fileID: 686019156}
+    - {fileID: 1877491476}
+    _brushStandTapZone: {fileID: 1140470137}
+    _brushStandRenderer: {fileID: 1140470136}
+    _faceZone: {fileID: 1813440264}
+    _brushPickupPoint: {fileID: 360210164}
+    _brushChestHoldPoint: {fileID: 463579255}
+    _faceApplyPoint: {fileID: 724243845}
+--- !u!4 &582399593
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 582399591}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &608284412
 GameObject:
   m_ObjectHideFlags: 0
@@ -4128,12 +4212,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 661788645}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beb68d334c8445899dc4ec1584924b05, type: 3}
+  m_Script: {fileID: 11500000, guid: f5450150f50149aab35a68c6bde845a9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorView
-  _colorIndex: 4
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorViewNew
   _tapZone: {fileID: 661788647}
-  _colorRenderer: {fileID: 661788648}
   _brushDipPoint: {fileID: 1706243568}
   _brushTipColor: {r: 0.9960785, g: 0.5882353, b: 0.5882353, a: 1}
 --- !u!1 &663418803
@@ -4182,13 +4264,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 663418803}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82b2bb23280140079312872902b4b8eb, type: 3}
+  m_Script: {fileID: 11500000, guid: e232a6c964f24c98af277000feff6915, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.MakeupBookView
-  _bookTabs:
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.MakeupBookViewNew
+  _tabViews:
   - {fileID: 531186617}
   - {fileID: 353314864}
-  - {fileID: 962547036}
+  - {fileID: 962547037}
 --- !u!1 &683959755
 GameObject:
   m_ObjectHideFlags: 0
@@ -4420,14 +4502,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 686019152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beb68d334c8445899dc4ec1584924b05, type: 3}
+  m_Script: {fileID: 11500000, guid: f5450150f50149aab35a68c6bde845a9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorView
-  _colorIndex: 7
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorViewNew
   _tapZone: {fileID: 686019154}
-  _colorRenderer: {fileID: 686019155}
   _brushDipPoint: {fileID: 1032185991}
-  _brushTipColor: {r: 0.98823535, g: 0.53333336, b: 0.4431373, a: 1}
+  _brushTipColor: {r: 0.98823535, g: 0.53333336, b: 0.43921572, a: 1}
 --- !u!1 &713282047
 GameObject:
   m_ObjectHideFlags: 0
@@ -4461,81 +4541,6 @@ Transform:
   - {fileID: 53112627}
   - {fileID: 1016786068}
   m_Father: {fileID: 663418804}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &718669276
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 718669278}
-  - component: {fileID: 718669277}
-  m_Layer: 0
-  m_Name: BlushSequence
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &718669277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 718669276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7622d8c7631043fdb26b16bd551ac559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushMakeupSequence
-  _mainCamera: {fileID: 519420031}
-  _makeupBookView: {fileID: 663418805}
-  _blushPaletteColors:
-  - {fileID: 1630051166}
-  - {fileID: 1448239950}
-  - {fileID: 1039779220}
-  - {fileID: 288698381}
-  - {fileID: 661788649}
-  - {fileID: 164385176}
-  - {fileID: 1658443564}
-  - {fileID: 686019156}
-  - {fileID: 1877491475}
-  _brushStandTapZone: {fileID: 1140470137}
-  _brushStandVisual: {fileID: 1140470136}
-  _handRoot: {fileID: 2082120883}
-  _brushTipPoint: {fileID: 1803199562}
-  _handDragZone: {fileID: 1554538894}
-  _brushInHandVisual: {fileID: 2098090826}
-  _brushTipRenderer: {fileID: 1803199563}
-  _handDefaultPoint: {fileID: 1574173970}
-  _brushPickupPoint: {fileID: 360210164}
-  _brushChestHoldPoint: {fileID: 463579255}
-  _faceApplyPoint: {fileID: 724243845}
-  _faceZone: {fileID: 1813440264}
-  _playerBlushStateRenderer: {fileID: 893954585}
-  _automaticMoveDuration: 0.35
-  _dragSmoothTime: 0.04
-  _blushApplyDuration: 0.35
-  _brushDipAnimationStepDuration: 0.08
-  _brushDipOffset: 0.12
-  _defaultBrushTipColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!4 &718669278
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 718669276}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &724243844
 GameObject:
@@ -5236,7 +5241,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 893954584}
-  - component: {fileID: 893954585}
   m_Layer: 0
   m_Name: PlayerFaceStateRenderer
   m_TagString: Untagged
@@ -5262,28 +5266,6 @@ Transform:
   - {fileID: 153326888}
   m_Father: {fileID: 1707087835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &893954585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893954583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f81add3451b94691a0d1113c451df8de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.PlayerBlushStateRenderer
-  _blushRenderers:
-  - {fileID: 876985139}
-  - {fileID: 1557907252}
-  - {fileID: 1553886219}
-  - {fileID: 821942986}
-  - {fileID: 1044040091}
-  - {fileID: 2083491151}
-  - {fileID: 1773185011}
-  - {fileID: 912721357}
-  - {fileID: 1777693775}
 --- !u!1 &912721355
 GameObject:
   m_ObjectHideFlags: 0
@@ -5522,8 +5504,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 962547034}
-  - component: {fileID: 962547036}
   - component: {fileID: 962547035}
+  - component: {fileID: 962547037}
   m_Layer: 0
   m_Name: MakeupEyeshadow
   m_TagString: Untagged
@@ -5594,7 +5576,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &962547036
+--- !u!114 &962547037
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5603,13 +5585,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 962547033}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 382ed22950f04cc9bd5782b54ff0cdc7, type: 3}
+  m_Script: {fileID: 11500000, guid: a5723bb7f9e848a5a10f761c3b1a1642, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.MakeupBookTabView
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.MakeupBookTabViewNew
   _pageType: 3
   _tapZone: {fileID: 962547035}
-  _inactiveTabVisual: {fileID: 1247349545}
-  _activeTabVisual: {fileID: 1863233496}
+  _inactiveTabRenderer: {fileID: 1247349545}
+  _activeTabRenderer: {fileID: 1863233496}
   _pageRoot: {fileID: 1016786068}
 --- !u!1 &1016786067
 GameObject:
@@ -5626,7 +5608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1016786068
 Transform:
   m_ObjectHideFlags: 0
@@ -5682,10 +5664,8 @@ Transform:
   m_Children:
   - {fileID: 724243845}
   - {fileID: 1574173970}
-  - {fileID: 2091761818}
-  - {fileID: 530300174}
-  - {fileID: 360210164}
-  - {fileID: 463579255}
+  - {fileID: 1536878221}
+  - {fileID: 205282373}
   m_Father: {fileID: 1707087835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1032185990
@@ -5858,12 +5838,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1039779216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beb68d334c8445899dc4ec1584924b05, type: 3}
+  m_Script: {fileID: 11500000, guid: f5450150f50149aab35a68c6bde845a9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorView
-  _colorIndex: 2
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorViewNew
   _tapZone: {fileID: 1039779218}
-  _colorRenderer: {fileID: 1039779219}
   _brushDipPoint: {fileID: 125905604}
   _brushTipColor: {r: 0.9960785, g: 0.7607844, b: 0.69803923, a: 1}
 --- !u!1 &1044040089
@@ -7954,12 +7932,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1448239946}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beb68d334c8445899dc4ec1584924b05, type: 3}
+  m_Script: {fileID: 11500000, guid: f5450150f50149aab35a68c6bde845a9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorView
-  _colorIndex: 1
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorViewNew
   _tapZone: {fileID: 1448239948}
-  _colorRenderer: {fileID: 1448239949}
   _brushDipPoint: {fileID: 290922072}
   _brushTipColor: {r: 0.95294124, g: 0.5294118, b: 0.6392157, a: 1}
 --- !u!1 &1459198544
@@ -8304,6 +8280,39 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1536878220
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1536878221}
+  m_Layer: 0
+  m_Name: Creame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1536878221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536878220}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2091761818}
+  - {fileID: 530300174}
+  m_Father: {fileID: 1022644142}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1538817626
 GameObject:
   m_ObjectHideFlags: 0
@@ -9261,12 +9270,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1630051162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beb68d334c8445899dc4ec1584924b05, type: 3}
+  m_Script: {fileID: 11500000, guid: f5450150f50149aab35a68c6bde845a9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorView
-  _colorIndex: 0
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorViewNew
   _tapZone: {fileID: 1630051164}
-  _colorRenderer: {fileID: 1630051165}
   _brushDipPoint: {fileID: 1840733664}
   _brushTipColor: {r: 0.9960785, g: 0.69803923, b: 0.8117648, a: 1}
 --- !u!1 &1630576353
@@ -9518,12 +9525,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1658443560}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beb68d334c8445899dc4ec1584924b05, type: 3}
+  m_Script: {fileID: 11500000, guid: f5450150f50149aab35a68c6bde845a9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorView
-  _colorIndex: 6
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorViewNew
   _tapZone: {fileID: 1658443562}
-  _colorRenderer: {fileID: 1658443563}
   _brushDipPoint: {fileID: 335310270}
   _brushTipColor: {r: 0.9490197, g: 0.6901961, b: 0.89019614, a: 1}
 --- !u!1 &1664026878
@@ -9748,7 +9753,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1707087835}
-  - component: {fileID: 1707087836}
   m_Layer: 0
   m_Name: GameplayRoot
   m_TagString: Untagged
@@ -9779,23 +9783,6 @@ Transform:
   - {fileID: 2082120883}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1707087836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1707087834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 985d554328be448fb04574adc4973416, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.PlayerFaceStateRenderer
-  _bodyWithAcneRenderer: {fileID: 2116901655}
-  _bodyClearRenderer: {fileID: 1664026880}
-  _acneRenderers:
-  - {fileID: 2142726932}
-  - {fileID: 161899842}
 --- !u!1 &1736815700
 GameObject:
   m_ObjectHideFlags: 0
@@ -10850,7 +10837,7 @@ GameObject:
   - component: {fileID: 1877491472}
   - component: {fileID: 1877491474}
   - component: {fileID: 1877491473}
-  - component: {fileID: 1877491475}
+  - component: {fileID: 1877491476}
   m_Layer: 0
   m_Name: blush_color_09_0
   m_TagString: Untagged
@@ -10969,7 +10956,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &1877491475
+--- !u!114 &1877491476
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10978,12 +10965,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1877491471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beb68d334c8445899dc4ec1584924b05, type: 3}
+  m_Script: {fileID: 11500000, guid: f5450150f50149aab35a68c6bde845a9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorView
-  _colorIndex: 8
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.BlushPaletteColorViewNew
   _tapZone: {fileID: 1877491473}
-  _colorRenderer: {fileID: 1877491474}
   _brushDipPoint: {fileID: 1656933560}
   _brushTipColor: {r: 0.9803922, g: 0.69803923, b: 0.5254902, a: 1}
 --- !u!1 &1887573656
@@ -11836,7 +11821,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1022644142}
+  m_Father: {fileID: 1536878221}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2098090824
 GameObject:
@@ -12210,5 +12195,4 @@ SceneRoots:
   - {fileID: 769473224}
   - {fileID: 1589639067}
   - {fileID: 1707087835}
-  - {fileID: 718669278}
-  - {fileID: 124829145}
+  - {fileID: 582399593}
