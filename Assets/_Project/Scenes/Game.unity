@@ -568,6 +568,98 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &48096533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 48096535}
+  - component: {fileID: 48096534}
+  m_Layer: 0
+  m_Name: LipstickHandVisual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &48096534
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48096533}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 1993180761
+  m_SortingLayer: 6
+  m_SortingOrder: 1
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: -7973376512685140356, guid: 9de855135bc9a394fb42d60ad71a6f3a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2.29, y: 4.94}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+--- !u!4 &48096535
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48096533}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.31, y: 1.16, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1438281116}
+  m_Father: {fileID: 2082120883}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &53112626
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,7 +1200,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 556988775
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8513258487256937119, guid: b523da4634c4b2a4d849c0248115fe32, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1541,39 +1633,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &205282372
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 205282373}
-  m_Layer: 0
-  m_Name: Brush
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &205282373
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 205282372}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 360210164}
-  - {fileID: 463579255}
-  m_Father: {fileID: 1022644142}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &207104422
 GameObject:
   m_ObjectHideFlags: 0
@@ -1814,6 +1873,7 @@ GameObject:
   - component: {fileID: 246526900}
   - component: {fileID: 246526902}
   - component: {fileID: 246526901}
+  - component: {fileID: 246526903}
   m_Layer: 0
   m_Name: Lipstick_color_02_0
   m_TagString: Untagged
@@ -1932,6 +1992,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &246526903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246526899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e349fc9f499a45daa280c64011fdc596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.LipstickPaletteColorView
+  _tapZone: {fileID: 246526901}
+  _pickupPoint: {fileID: 246526900}
+  _bookLipstickVisual: {fileID: 246526899}
+  _lipstickInHandSprite: {fileID: -1451781210149412861, guid: 07177cbdf46ad2b4e9d0d187841fe6ea, type: 3}
 --- !u!1 &273532800
 GameObject:
   m_ObjectHideFlags: 0
@@ -2655,7 +2731,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 205282373}
+  m_Father: {fileID: 1022644142}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &395116993
 GameObject:
@@ -2839,6 +2915,37 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &429564819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 429564820}
+  m_Layer: 0
+  m_Name: LowerLipLeftApplyPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &429564820
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429564819}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1641887165}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &445968417
 GameObject:
   m_ObjectHideFlags: 0
@@ -2940,7 +3047,7 @@ GameObject:
   m_Component:
   - component: {fileID: 463579255}
   m_Layer: 0
-  m_Name: BrushChestHoldPoint
+  m_Name: ChestHoldPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2959,7 +3066,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 205282373}
+  m_Father: {fileID: 1022644142}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &495967068
 GameObject:
@@ -3522,6 +3629,13 @@ MonoBehaviour:
   - {fileID: 1773185011}
   - {fileID: 912721357}
   - {fileID: 1777693775}
+  _lipstickRenderers:
+  - {fileID: 867187592}
+  - {fileID: 2135894282}
+  - {fileID: 884558278}
+  - {fileID: 1577374125}
+  - {fileID: 1191274059}
+  - {fileID: 1164041090}
 --- !u!1 &548773886
 GameObject:
   m_ObjectHideFlags: 0
@@ -3643,7 +3757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.MakeupGameplay
   _mainCamera: {fileID: 519420031}
-  _makeupBookViewNew: {fileID: 663418805}
+  _makeupBookView: {fileID: 663418805}
   _playerFaceStateView: {fileID: 539102466}
   _handConfig:
     _handRoot: {fileID: 2082120883}
@@ -3652,6 +3766,9 @@ MonoBehaviour:
     _creamInHandVisual: {fileID: 495967068}
     _brushInHandRenderer: {fileID: 2098090826}
     _brushTipRenderer: {fileID: 1803199563}
+    _lipstickApplyPoint: {fileID: 1438281116}
+    _lipstickInHandRenderer: {fileID: 48096534}
+    _defaultLipstickInHandSprite: {fileID: -7973376512685140356, guid: 9de855135bc9a394fb42d60ad71a6f3a, type: 3}
     _handDefaultPoint: {fileID: 1574173970}
     _defaultBrushTipColor: {r: 1, g: 1, b: 1, a: 1}
   _motionConfig:
@@ -3709,6 +3826,20 @@ MonoBehaviour:
     _brushPickupPoint: {fileID: 360210164}
     _brushChestHoldPoint: {fileID: 463579255}
     _faceApplyPoint: {fileID: 724243845}
+  _lipstickConfig:
+    _paletteColors:
+    - {fileID: 1831863360}
+    - {fileID: 246526903}
+    - {fileID: 1120471037}
+    - {fileID: 1617019582}
+    - {fileID: 1912749073}
+    - {fileID: 1320177823}
+    _faceZone: {fileID: 1813440264}
+    _lipstickChestHoldPoint: {fileID: 463579255}
+    _upperLipLeftApplyPoint: {fileID: 1318535536}
+    _upperLipRightApplyPoint: {fileID: 1190132956}
+    _lowerLipRightApplyPoint: {fileID: 716360786}
+    _lowerLipLeftApplyPoint: {fileID: 429564820}
 --- !u!4 &582399593
 Transform:
   m_ObjectHideFlags: 0
@@ -4541,6 +4672,37 @@ Transform:
   - {fileID: 53112627}
   - {fileID: 1016786068}
   m_Father: {fileID: 663418804}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &716360785
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 716360786}
+  m_Layer: 0
+  m_Name: LowerLipRightApplyPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &716360786
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716360785}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.9, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1641887165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &724243844
 GameObject:
@@ -5608,7 +5770,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1016786068
 Transform:
   m_ObjectHideFlags: 0
@@ -5664,8 +5826,10 @@ Transform:
   m_Children:
   - {fileID: 724243845}
   - {fileID: 1574173970}
+  - {fileID: 463579255}
   - {fileID: 1536878221}
-  - {fileID: 205282373}
+  - {fileID: 360210164}
+  - {fileID: 1641887165}
   m_Father: {fileID: 1707087835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1032185990
@@ -6140,6 +6304,7 @@ GameObject:
   - component: {fileID: 1120471034}
   - component: {fileID: 1120471036}
   - component: {fileID: 1120471035}
+  - component: {fileID: 1120471037}
   m_Layer: 0
   m_Name: Lipstick_color_03_0
   m_TagString: Untagged
@@ -6258,6 +6423,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1120471037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120471033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e349fc9f499a45daa280c64011fdc596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.LipstickPaletteColorView
+  _tapZone: {fileID: 1120471035}
+  _pickupPoint: {fileID: 1120471034}
+  _bookLipstickVisual: {fileID: 1120471033}
+  _lipstickInHandSprite: {fileID: 1764545999717624069, guid: beb5a18a30357164480496705125d68d, type: 3}
 --- !u!1 &1130777288
 GameObject:
   m_ObjectHideFlags: 0
@@ -6458,7 +6639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1140470135
 Transform:
   m_ObjectHideFlags: 0
@@ -6752,6 +6933,37 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1190132955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1190132956}
+  m_Layer: 0
+  m_Name: UpperLipRightApplyPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1190132956
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190132955}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.9, y: 3.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1641887165}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1191274057
 GameObject:
   m_ObjectHideFlags: 0
@@ -7378,6 +7590,37 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1318535535
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1318535536}
+  m_Layer: 0
+  m_Name: UpperLipLeftApplyPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1318535536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1318535535}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1641887165}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1319573518
 GameObject:
   m_ObjectHideFlags: 0
@@ -7480,6 +7723,7 @@ GameObject:
   - component: {fileID: 1320177820}
   - component: {fileID: 1320177822}
   - component: {fileID: 1320177821}
+  - component: {fileID: 1320177823}
   m_Layer: 0
   m_Name: Lipstick_color_06_0
   m_TagString: Untagged
@@ -7598,6 +7842,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1320177823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320177819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e349fc9f499a45daa280c64011fdc596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.LipstickPaletteColorView
+  _tapZone: {fileID: 1320177821}
+  _pickupPoint: {fileID: 1320177820}
+  _bookLipstickVisual: {fileID: 1320177819}
+  _lipstickInHandSprite: {fileID: 8831518379824529241, guid: be3767e0f7eba4a4892d09a78c281c3b, type: 3}
 --- !u!1 &1327523517
 GameObject:
   m_ObjectHideFlags: 0
@@ -7793,6 +8053,37 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1438281115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1438281116}
+  m_Layer: 0
+  m_Name: ApplyPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1438281116
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438281115}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.574, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 48096535}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1448239946
 GameObject:
   m_ObjectHideFlags: 0
@@ -7938,6 +8229,37 @@ MonoBehaviour:
   _tapZone: {fileID: 1448239948}
   _brushDipPoint: {fileID: 290922072}
   _brushTipColor: {r: 0.95294124, g: 0.5294118, b: 0.6392157, a: 1}
+--- !u!1 &1452758216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1452758217}
+  m_Layer: 0
+  m_Name: LipstickPickupPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1452758217
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452758216}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1641887165}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1459198544
 GameObject:
   m_ObjectHideFlags: 0
@@ -8164,7 +8486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1495616015
 Transform:
   m_ObjectHideFlags: 0
@@ -8922,6 +9244,7 @@ GameObject:
   - component: {fileID: 1617019579}
   - component: {fileID: 1617019581}
   - component: {fileID: 1617019580}
+  - component: {fileID: 1617019582}
   m_Layer: 0
   m_Name: Lipstick_color_04_0
   m_TagString: Untagged
@@ -9040,6 +9363,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1617019582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617019578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e349fc9f499a45daa280c64011fdc596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.LipstickPaletteColorView
+  _tapZone: {fileID: 1617019580}
+  _pickupPoint: {fileID: 1617019579}
+  _bookLipstickVisual: {fileID: 1617019578}
+  _lipstickInHandSprite: {fileID: 3291508729261550910, guid: ebc48f14de9631a4ab026adbe680fd0b, type: 3}
 --- !u!1 &1624626532
 GameObject:
   m_ObjectHideFlags: 0
@@ -9355,6 +9694,42 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!1 &1641887164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1641887165}
+  m_Layer: 0
+  m_Name: Lipstick
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1641887165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641887164}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1452758217}
+  - {fileID: 1318535536}
+  - {fileID: 1190132956}
+  - {fileID: 429564820}
+  - {fileID: 716360786}
+  m_Father: {fileID: 1022644142}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1656933559
 GameObject:
   m_ObjectHideFlags: 0
@@ -10472,7 +10847,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 556988775
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: -8065349513040393560, guid: 68ebcaa670de2d542862d3001aecaa69, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -10495,6 +10870,7 @@ GameObject:
   - component: {fileID: 1831863357}
   - component: {fileID: 1831863359}
   - component: {fileID: 1831863358}
+  - component: {fileID: 1831863360}
   m_Layer: 0
   m_Name: Lipstick_color_01_0
   m_TagString: Untagged
@@ -10613,6 +10989,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1831863360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831863356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e349fc9f499a45daa280c64011fdc596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.LipstickPaletteColorView
+  _tapZone: {fileID: 1831863358}
+  _pickupPoint: {fileID: 1831863357}
+  _bookLipstickVisual: {fileID: 1831863356}
+  _lipstickInHandSprite: {fileID: -7973376512685140356, guid: 9de855135bc9a394fb42d60ad71a6f3a, type: 3}
 --- !u!1 &1840733663
 GameObject:
   m_ObjectHideFlags: 0
@@ -11073,6 +11465,7 @@ GameObject:
   - component: {fileID: 1912749070}
   - component: {fileID: 1912749072}
   - component: {fileID: 1912749071}
+  - component: {fileID: 1912749073}
   m_Layer: 0
   m_Name: Lipstick_color_05_0
   m_TagString: Untagged
@@ -11191,6 +11584,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1912749073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912749069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e349fc9f499a45daa280c64011fdc596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Project.Gameplay.LipstickPaletteColorView
+  _tapZone: {fileID: 1912749071}
+  _pickupPoint: {fileID: 1912749070}
+  _bookLipstickVisual: {fileID: 1912749069}
+  _lipstickInHandSprite: {fileID: 8171380537145016961, guid: cb711de9b9409b94b974437d61ceeda2, type: 3}
 --- !u!1 &1919661063
 GameObject:
   m_ObjectHideFlags: 0
@@ -11698,6 +12107,7 @@ Transform:
   - {fileID: 683959756}
   - {fileID: 495967069}
   - {fileID: 2098090825}
+  - {fileID: 48096535}
   - {fileID: 1554538893}
   m_Father: {fileID: 1707087835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11839,7 +12249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2098090825
 Transform:
   m_ObjectHideFlags: 0
@@ -12176,7 +12586,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 556988775
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 4636457669555507904, guid: b523da4634c4b2a4d849c0248115fe32, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -50,13 +50,13 @@ namespace _Project.Gameplay
             _runtimeState.ProcessStageType = MakeupProcessStageType.WaitingForBlushColorSelection;
         }
 
-        public async UniTask SelectBlushColorAsync(BlushPaletteColorViewNew colorViewNew, int colorIndex)
+        public async UniTask SelectBlushColorAsync(BlushPaletteColorView colorView, int colorIndex)
         {
             bool canSelectColor =
                 _runtimeState.ProcessStageType == MakeupProcessStageType.WaitingForBlushColorSelection ||
                 _runtimeState.ProcessStageType == MakeupProcessStageType.WaitingForBrushDragStart;
 
-            if (canSelectColor == false || colorViewNew == null || colorViewNew.BrushDipPoint == null)
+            if (canSelectColor == false || colorView == null || colorView.BrushDipPoint == null)
                 return;
 
             _runtimeState.ActiveSequence?.Kill();
@@ -65,11 +65,11 @@ namespace _Project.Gameplay
             _runtimeState.SelectedBlushColorIndex = colorIndex;
 
             await _handMotion.MoveBrushTipToAsync(
-                colorViewNew.BrushDipPoint.position,
+                colorView.BrushDipPoint.position,
                 _motionConfig.AutomaticMoveDuration);
             await _handMotion.PlayBrushDipAnimationAsync();
 
-            _visualState.ApplyBrushTipColor(colorViewNew);
+            _visualState.ApplyBrushTipColor(colorView);
 
             if (_blushConfig.BrushChestHoldPoint == null)
             {

@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace _Project.Gameplay
 {
-    public sealed class MakeupBookViewNew : MonoBehaviour
+    public sealed class MakeupBookView : MonoBehaviour
     {
-        [SerializeField] private MakeupBookTabViewNew[] _tabViews;
+        [SerializeField] private MakeupBookTabView[] _tabViews;
 
         private void Awake()
         {
@@ -15,18 +15,18 @@ namespace _Project.Gameplay
         {
             for (int index = 0; index < _tabViews.Length; index++)
             {
-                MakeupBookTabViewNew tabViewNew = _tabViews[index];
+                MakeupBookTabView tabView = _tabViews[index];
 
-                if (tabViewNew == null)
+                if (tabView == null)
                     continue;
 
-                bool isSelected = tabViewNew.PageType == pageType;
+                bool isSelected = tabView.PageType == pageType;
                 
-                tabViewNew.SetSelected(isSelected);
+                tabView.SetSelected(isSelected);
             }
         }
 
-        public bool TryGetTab(Vector3 worldPoint, out MakeupBookTabViewNew selectedTabViewNew)
+        public bool TryGetTab(Vector3 worldPoint, out MakeupBookTabView selectedTabView)
         {
             Collider2D[] collidersUnderPointer = Physics2D.OverlapPointAll(worldPoint);
 
@@ -36,21 +36,21 @@ namespace _Project.Gameplay
 
                 for (int tabIndex = 0; tabIndex < _tabViews.Length; tabIndex++)
                 {
-                    MakeupBookTabViewNew tabViewNew = _tabViews[tabIndex];
+                    MakeupBookTabView tabView = _tabViews[tabIndex];
 
-                    if (tabViewNew == null)
+                    if (tabView == null)
                         continue;
 
-                    if (tabViewNew.TapZone == currentCollider)
+                    if (tabView.TapZone == currentCollider)
                     {
-                        selectedTabViewNew = tabViewNew;
+                        selectedTabView = tabView;
                         
                         return true;
                     }
                 }
             }
 
-            selectedTabViewNew = null;
+            selectedTabView = null;
             
             return false;
         }

@@ -8,17 +8,20 @@ namespace _Project.Gameplay
     public sealed class MakeupPointerInput
     {
         private readonly Camera _mainCamera;
-        private readonly MakeupBookViewNew _makeupBookViewNew;
+        private readonly MakeupBookView _makeupBookView;
         private readonly BlushMakeupConfig _blushConfig;
+        private readonly LipstickMakeupConfig _lipstickConfig;
 
         public MakeupPointerInput(
             Camera mainCamera,
-            MakeupBookViewNew makeupBookViewNew,
-            BlushMakeupConfig blushConfig)
+            MakeupBookView makeupBookView,
+            BlushMakeupConfig blushConfig,
+            LipstickMakeupConfig lipstickConfig)
         {
             _mainCamera = mainCamera;
-            _makeupBookViewNew = makeupBookViewNew;
+            _makeupBookView = makeupBookView;
             _blushConfig = blushConfig;
+            _lipstickConfig = lipstickConfig;
         }
 
         public bool IsLeftMousePressedThisFrame() => 
@@ -32,6 +35,22 @@ namespace _Project.Gameplay
         public bool IsPointerBlockedByUi() => 
             EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
 
+        public Collider2D GetFirstColliderUnderPointer()
+        {
+            if (TryGetPointerWorldPosition(out Vector3 pointerWorldPosition) == false)
+                return null;
+
+            return Physics2D.OverlapPoint(pointerWorldPosition);
+        }
+
+        public Collider2D[] GetCollidersUnderPointer()
+        {
+            if (TryGetPointerWorldPosition(out Vector3 pointerWorldPosition) == false)
+                return Array.Empty<Collider2D>();
+
+            return Physics2D.OverlapPointAll(pointerWorldPosition);
+        }
+        
         public bool TryGetPointerWorldPosition(out Vector3 pointerWorldPosition)
         {
             if (_mainCamera == null || Mouse.current == null)
@@ -53,36 +72,20 @@ namespace _Project.Gameplay
             return true;
         }
 
-        public Collider2D GetFirstColliderUnderPointer()
-        {
-            if (TryGetPointerWorldPosition(out Vector3 pointerWorldPosition) == false)
-                return null;
-
-            return Physics2D.OverlapPoint(pointerWorldPosition);
-        }
-
-        public Collider2D[] GetCollidersUnderPointer()
-        {
-            if (TryGetPointerWorldPosition(out Vector3 pointerWorldPosition) == false)
-                return Array.Empty<Collider2D>();
-
-            return Physics2D.OverlapPointAll(pointerWorldPosition);
-        }
-
-        public bool TryGetBookTab(out MakeupBookTabViewNew selectedTabView)
+        public bool TryGetBookTab(out MakeupBookTabView selectedTabView)
         {
             selectedTabView = null;
 
-            if (_makeupBookViewNew == null)
+            if (_makeupBookView == null)
                 return false;
 
             if (TryGetPointerWorldPosition(out Vector3 pointerWorldPosition) == false)
                 return false;
 
-            return _makeupBookViewNew.TryGetTab(pointerWorldPosition, out selectedTabView);
+            return _makeupBookView.TryGetTab(pointerWorldPosition, out selectedTabView);
         }
 
-        public bool TryGetPaletteColor(out BlushPaletteColorViewNew selectedColorView, out int selectedColorIndex)
+        public bool TryGetPaletteColor(out BlushPaletteColorView selectedColorView, out int selectedColorIndex)
         {
             selectedColorView = null;
             selectedColorIndex = -1;
@@ -91,7 +94,7 @@ namespace _Project.Gameplay
                 return false;
 
             Collider2D[] collidersUnderPointer = Physics2D.OverlapPointAll(pointerWorldPosition);
-            BlushPaletteColorViewNew[] paletteColors = _blushConfig.PaletteColors;
+            BlushPaletteColorView[] paletteColors = _blushConfig.PaletteColors;
 
             for (int colliderIndex = 0; colliderIndex < collidersUnderPointer.Length; colliderIndex++)
             {
@@ -99,15 +102,53 @@ namespace _Project.Gameplay
 
                 for (int colorIndex = 0; colorIndex < paletteColors.Length; colorIndex++)
                 {
-                    BlushPaletteColorViewNew colorViewNew = paletteColors[colorIndex];
+                    BlushPaletteColorView colorView = paletteColors[colorIndex];
 
-                    if (colorViewNew == null)
+                    if (colorView == null)
                         continue;
 
-                    if (colorViewNew.TapZone == currentCollider)
+                    if (colorView.TapZone == currentCollider)
                     {
-                        selectedColorView = colorViewNew;
+                        selectedColorView = colorView;
                         selectedColorIndex = colorIndex;
+                        
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+        
+        public bool TryGetLipstickSample(out LipstickPaletteColorView selectedLipstickView, out int selectedLipstickIndex)
+        {
+            selectedLipstickView = null;
+            selectedLipstickIndex = -1;
+
+            if (_lipstickConfig == null)
+                return false;
+
+            if (TryGetPointerWorldPosition(out Vector3 pointerWorldPosition) == false)
+                return false;
+
+            Collider2D[] collidersUnderPointer = Physics2D.OverlapPointAll(pointerWorldPosition);
+            LipstickPaletteColorView[] paletteColors = _lipstickConfig.PaletteColors;
+
+            for (int colliderIndex = 0; colliderIndex < collidersUnderPointer.Length; colliderIndex++)
+            {
+                Collider2D currentCollider = collidersUnderPointer[colliderIndex];
+
+                for (int colorIndex = 0; colorIndex < paletteColors.Length; colorIndex++)
+                {
+                    LipstickPaletteColorView colorView = paletteColors[colorIndex];
+
+                    if (colorView == null)
+                        continue;
+
+                    if (colorView.TapZone == currentCollider)
+                    {
+                        selectedLipstickView = colorView;
+                        selectedLipstickIndex = colorIndex;
                         
                         return true;
                     }

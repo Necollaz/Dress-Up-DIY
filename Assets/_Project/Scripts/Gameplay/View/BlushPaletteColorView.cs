@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace _Project.Gameplay
 {
-    public sealed class BlushPaletteColorViewNew : MonoBehaviour
+    public sealed class BlushPaletteColorView : MonoBehaviour
     {
         [SerializeField] private Collider2D _tapZone;
         [SerializeField] private Transform _brushDipPoint;

@@ -15,6 +15,9 @@ namespace _Project.Gameplay
 
         [Header("Blush")]
         [SerializeField] private SpriteRenderer[] _blushRenderers;
+        
+        [Header("Lipstick")]
+        [SerializeField] private SpriteRenderer[] _lipstickRenderers;
 
         private void Awake()
         {
@@ -25,6 +28,7 @@ namespace _Project.Gameplay
         {
             ResetCreamState();
             HideAllBlush();
+            HideAllLipstick();
         }
 
         public async UniTask HideAcneAsync(float duration)
@@ -104,6 +108,40 @@ namespace _Project.Gameplay
             finalColor.a = VISIBLE_ALPHA;
             selectedBlushRenderer.color = finalColor;
         }
+        
+        public async UniTask ShowLipstickAsync(int colorIndex, float duration)
+        {
+            if (TryGetLipstickRenderer(colorIndex, out SpriteRenderer selectedLipstickRenderer) == false)
+                return;
+
+            HideAllLipstick();
+
+            selectedLipstickRenderer.enabled = true;
+            selectedLipstickRenderer.gameObject.SetActive(true);
+
+            Color startColor = selectedLipstickRenderer.color;
+            startColor.a = HIDDEN_ALPHA;
+            selectedLipstickRenderer.color = startColor;
+
+            float elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                elapsedTime += Time.deltaTime;
+
+                float progress = Mathf.Clamp01(elapsedTime / duration);
+
+                Color currentColor = selectedLipstickRenderer.color;
+                currentColor.a = progress;
+                selectedLipstickRenderer.color = currentColor;
+
+                await UniTask.Yield();
+            }
+
+            Color finalColor = selectedLipstickRenderer.color;
+            finalColor.a = VISIBLE_ALPHA;
+            selectedLipstickRenderer.color = finalColor;
+        }
 
         private bool TryGetBlushRenderer(int colorIndex, out SpriteRenderer blushRenderer)
         {
@@ -117,6 +155,18 @@ namespace _Project.Gameplay
             blushRenderer = _blushRenderers[colorIndex];
             
             return blushRenderer != null;
+        }
+        
+        private bool TryGetLipstickRenderer(int colorIndex, out SpriteRenderer lipstickRenderer)
+        {
+            if (colorIndex < 0 || colorIndex >= _lipstickRenderers.Length)
+            {
+                lipstickRenderer = null;
+                return false;
+            }
+
+            lipstickRenderer = _lipstickRenderers[colorIndex];
+            return lipstickRenderer != null;
         }
         
         private void ResetCreamState()
@@ -150,6 +200,23 @@ namespace _Project.Gameplay
                 Color hiddenColor = blushRenderer.color;
                 hiddenColor.a = HIDDEN_ALPHA;
                 blushRenderer.color = hiddenColor;
+            }
+        }
+        
+        private void HideAllLipstick()
+        {
+            for (int index = 0; index < _lipstickRenderers.Length; index++)
+            {
+                SpriteRenderer lipstickRenderer = _lipstickRenderers[index];
+
+                if (lipstickRenderer == null)
+                    continue;
+
+                lipstickRenderer.enabled = false;
+
+                Color hiddenColor = lipstickRenderer.color;
+                hiddenColor.a = HIDDEN_ALPHA;
+                lipstickRenderer.color = hiddenColor;
             }
         }
 

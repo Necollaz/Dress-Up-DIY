@@ -2,13 +2,14 @@ using System;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 namespace _Project.Gameplay
 {
     public sealed class MakeupGameplay : MonoBehaviour
     {
         [SerializeField] private Camera _mainCamera;
-        [SerializeField] private MakeupBookViewNew _makeupBookViewNew;
+        [SerializeField] private MakeupBookView _makeupBookView;
         [SerializeField] private PlayerFaceStateView _playerFaceStateView;
 
         [Header("Configs")]
@@ -16,6 +17,7 @@ namespace _Project.Gameplay
         [SerializeField] private MakeupMotionConfig _motionConfig;
         [SerializeField] private CreamMakeupConfig _creamConfig;
         [SerializeField] private BlushMakeupConfig _blushConfig;
+        [SerializeField] private LipstickMakeupConfig _lipstickConfig;
 
         private MakeupRuntimeState _runtimeState;
         private MakeupPointerInput _pointerInput;
@@ -23,11 +25,12 @@ namespace _Project.Gameplay
         private MakeupHandMotion _handMotion;
         private CreamMakeupFlow _creamMakeupFlow;
         private BlushMakeupFlow _blushMakeupFlow;
+        private LipstickMakeupFlow _lipstickMakeupFlow;
 
         private void Awake()
         {
             _runtimeState = new MakeupRuntimeState();
-            _pointerInput = new MakeupPointerInput(_mainCamera, _makeupBookViewNew, _blushConfig);
+            _pointerInput = new MakeupPointerInput(_mainCamera, _makeupBookView, _blushConfig, _lipstickConfig);
             _visualState = new MakeupVisualState(_handConfig, _creamConfig, _blushConfig, _runtimeState);
             _handMotion = new MakeupHandMotion(_handConfig, _motionConfig, _runtimeState);
             _creamMakeupFlow = new CreamMakeupFlow(
@@ -44,9 +47,17 @@ namespace _Project.Gameplay
                 _runtimeState,
                 _visualState,
                 _handMotion);
+            _lipstickMakeupFlow = new LipstickMakeupFlow(
+                _lipstickConfig,
+                _motionConfig,
+                _playerFaceStateView,
+                _runtimeState,
+                _visualState,
+                _handMotion);
 
             _runtimeState.ProcessStageType = MakeupProcessStageType.Idle;
             _runtimeState.IsBlushPageOpened = false;
+            _runtimeState.IsLipstickPageOpened = false;
 
             _visualState.ResetActiveToolState();
             _playerFaceStateView?.ResetFaceState();
@@ -94,6 +105,22 @@ namespace _Project.Gameplay
                         MakeupProcessStageType.WaitingForBrushDragStart,
                         _blushMakeupFlow.ApplyBlushAsync).Forget();
                     break;
+
+                case MakeupProcessStageType.WaitingForLipstickSelection:
+                    ProcessLipstickPaletteColorInput();
+                    break;
+
+                case MakeupProcessStageType.WaitingForLipstickDragStart:
+                    ProcessLipstickPaletteColorInput();
+                    ProcessLipstickDragStartInput();
+                    break;
+
+                case MakeupProcessStageType.DraggingLipstickToFace:
+                    ProcessHandDragging(
+                        _lipstickConfig.FaceZone,
+                        MakeupProcessStageType.WaitingForLipstickDragStart,
+                        _lipstickMakeupFlow.ApplyLipstickAsync).Forget();
+                    break;
             }
         }
 
@@ -102,12 +129,12 @@ namespace _Project.Gameplay
             if (_pointerInput.IsLeftMousePressedThisFrame() == false || _pointerInput.IsPointerBlockedByUi())
                 return;
 
-            if (_pointerInput.TryGetBookTab(out MakeupBookTabViewNew selectedTabView) == false)
+            if (_pointerInput.TryGetBookTab(out MakeupBookTabView selectedTabView) == false)
                 return;
 
             if (selectedTabView.PageType == MakeupBookPageType.Blush)
             {
-                _makeupBookViewNew.SelectPage(MakeupBookPageType.Blush);
+                _makeupBookView.SelectPage(MakeupBookPageType.Blush);
 
                 if (_runtimeState.IsBlushPageOpened == false)
                     OpenBlushPageAsync().Forget();
@@ -115,8 +142,18 @@ namespace _Project.Gameplay
                 return;
             }
 
-            _makeupBookViewNew.SelectPage(selectedTabView.PageType);
-            
+            if (selectedTabView.PageType == MakeupBookPageType.Lipstick)
+            {
+                _makeupBookView.SelectPage(MakeupBookPageType.Lipstick);
+
+                if (_runtimeState.IsLipstickPageOpened == false)
+                    OpenLipstickPageAsync().Forget();
+
+                return;
+            }
+
+            _makeupBookView.SelectPage(selectedTabView.PageType);
+
             CloseBlushPageAsync().Forget();
         }
 
@@ -171,7 +208,7 @@ namespace _Project.Gameplay
                 return;
 
             if (_pointerInput.TryGetPaletteColor(
-                    out BlushPaletteColorViewNew selectedColorView,
+                    out BlushPaletteColorView selectedColorView,
                     out int selectedColorIndex))
             {
                 _blushMakeupFlow.SelectBlushColorAsync(selectedColorView, selectedColorIndex).Forget();
@@ -196,10 +233,43 @@ namespace _Project.Gameplay
                 }
             }
         }
+        
+        private void ProcessLipstickPaletteColorInput()
+        {
+            if (_pointerInput.IsLeftMousePressedThisFrame() == false || _pointerInput.IsPointerBlockedByUi())
+                return;
+
+            if (_pointerInput.TryGetLipstickSample(
+                    out LipstickPaletteColorView selectedLipstickView,
+                    out int selectedLipstickIndex))
+            {
+                _lipstickMakeupFlow.SelectLipstickAsync(selectedLipstickView, selectedLipstickIndex).Forget();
+            }
+        }
+
+        private void ProcessLipstickDragStartInput()
+        {
+            if (_pointerInput.IsLeftMousePressedThisFrame() == false || _pointerInput.IsPointerBlockedByUi())
+                return;
+
+            Collider2D[] collidersUnderPointer = _pointerInput.GetCollidersUnderPointer();
+
+            for (int index = 0; index < collidersUnderPointer.Length; index++)
+            {
+                if (collidersUnderPointer[index] == _handConfig.HandDragZone)
+                {
+                    _runtimeState.ProcessStageType = MakeupProcessStageType.DraggingLipstickToFace;
+                    _runtimeState.DragVelocity = Vector3.zero;
+                    
+                    return;
+                }
+            }
+        }
 
         private async UniTaskVoid OpenBlushPageAsync()
         {
             _runtimeState.IsBlushPageOpened = true;
+            _runtimeState.IsLipstickPageOpened = false;
             _runtimeState.ProcessStageType = MakeupProcessStageType.ReturningToolBeforeSwitch;
 
             await ReturnActiveToolToStandAsync();
@@ -208,10 +278,22 @@ namespace _Project.Gameplay
             
             _runtimeState.ProcessStageType = MakeupProcessStageType.WaitingForBrushSelection;
         }
+        
+        private async UniTaskVoid OpenLipstickPageAsync()
+        {
+            _runtimeState.IsLipstickPageOpened = true;
+            _runtimeState.IsBlushPageOpened = false;
+            _runtimeState.ProcessStageType = MakeupProcessStageType.ReturningToolBeforeSwitch;
+
+            await ReturnActiveToolToStandAsync();
+
+            _runtimeState.ProcessStageType = MakeupProcessStageType.WaitingForLipstickSelection;
+        }
 
         private async UniTaskVoid CloseBlushPageAsync()
         {
             _runtimeState.IsBlushPageOpened = false;
+            _runtimeState.IsLipstickPageOpened = false;
             _runtimeState.ProcessStageType = MakeupProcessStageType.ReturningToolBeforeSwitch;
 
             await ReturnActiveToolToStandAsync();
@@ -225,15 +307,15 @@ namespace _Project.Gameplay
         {
             _runtimeState.ProcessStageType = MakeupProcessStageType.ReturningToolBeforeSwitch;
 
-            if (_runtimeState.IsBlushPageOpened)
-            {
-                _makeupBookViewNew?.SelectPage(MakeupBookPageType.None);
-                
-                _runtimeState.IsBlushPageOpened = false;
-            }
+            if (_runtimeState.IsBlushPageOpened || _runtimeState.IsLipstickPageOpened)
+                _makeupBookView?.SelectPage(MakeupBookPageType.None);
+
+            _runtimeState.IsBlushPageOpened = false;
+            _runtimeState.IsLipstickPageOpened = false;
 
             _visualState.SetBrushStandVisible(false);
             _visualState.ResetBrushTipColor();
+            _visualState.ResetLipstickInHandSprite();
 
             await ReturnActiveToolToStandAsync();
             await _creamMakeupFlow.StartCreamSequenceAsync();
@@ -272,17 +354,24 @@ namespace _Project.Gameplay
                 
                 await _handMotion.MoveHandToDefaultPointAsync();
             }
+            else if (_visualState.IsLipstickInHandVisible())
+            {
+                await _lipstickMakeupFlow.ReturnSelectedLipstickToBookAsync();
+            }
             else
             {
                 _visualState.SetCreamInHandVisible(false);
                 _visualState.SetCreamStandVisible(true);
                 _visualState.SetBrushInHandVisible(false);
                 _visualState.SetBrushStandVisible(false);
+                _visualState.SetLipstickInHandVisible(false);
                 _visualState.ResetBrushTipColor();
+                _visualState.ResetLipstickInHandSprite();
                 _visualState.MoveHandToDefaultPointImmediately();
             }
 
             _runtimeState.SelectedBlushColorIndex = -1;
+            _runtimeState.SelectedLipstickColorIndex = -1;
             _runtimeState.DragVelocity = Vector3.zero;
         }
 

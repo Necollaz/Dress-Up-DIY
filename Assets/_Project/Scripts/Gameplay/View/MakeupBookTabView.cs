@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace _Project.Gameplay
 {
-    public sealed class MakeupBookTabViewNew : MonoBehaviour
+    public sealed class MakeupBookTabView : MonoBehaviour
     {
         [SerializeField] private MakeupBookPageType _pageType;
         [SerializeField] private Collider2D _tapZone;

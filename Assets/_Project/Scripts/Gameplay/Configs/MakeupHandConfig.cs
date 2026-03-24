@@ -14,7 +14,12 @@ namespace _Project.Gameplay
         [SerializeField] private GameObject _creamInHandVisual;
         [SerializeField] private SpriteRenderer _brushInHandRenderer;
         [SerializeField] private SpriteRenderer _brushTipRenderer;
-
+        
+        [Space(10)]
+        [SerializeField] private Transform _lipstickApplyPoint;
+        [SerializeField] private SpriteRenderer _lipstickInHandRenderer;
+        [SerializeField] private Sprite _defaultLipstickInHandSprite;
+        
         [Space(10)]
         [SerializeField] private Transform _handDefaultPoint;
 
@@ -28,6 +33,10 @@ namespace _Project.Gameplay
         public GameObject CreamInHandVisual => _creamInHandVisual;
         public SpriteRenderer BrushInHandRenderer => _brushInHandRenderer;
         public SpriteRenderer BrushTipRenderer => _brushTipRenderer;
+        
+        public Transform LipstickApplyPoint => _lipstickApplyPoint;
+        public SpriteRenderer LipstickInHandRenderer => _lipstickInHandRenderer;
+        public Sprite DefaultLipstickInHandSprite => _defaultLipstickInHandSprite;
 
         public Transform HandDefaultPoint => _handDefaultPoint;
 

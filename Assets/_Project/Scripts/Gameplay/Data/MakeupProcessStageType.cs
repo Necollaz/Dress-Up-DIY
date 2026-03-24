@@ -22,5 +22,13 @@ namespace _Project.Gameplay
         ReturningBrush = 15,
 
         ReturningToolBeforeSwitch = 16,
+        
+        WaitingForLipstickSelection = 17,
+        MovingHandToLipstick = 18,
+        MovingLipstickToChestHoldPoint = 19,
+        WaitingForLipstickDragStart = 20,
+        DraggingLipstickToFace = 21,
+        ApplyingLipstick = 22,
+        ReturningLipstick = 23,
     }
 }

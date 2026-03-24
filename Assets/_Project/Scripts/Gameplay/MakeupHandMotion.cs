@@ -76,7 +76,24 @@ namespace _Project.Gameplay
 
             await MoveHandToAsync(targetHandRootPosition, duration);
         }
+        
+        public async UniTask MoveLipstickApplyPointToAsync(Vector3 targetApplyPointPosition, float duration)
+        {
+            Transform handRoot = _handConfig.HandRoot;
 
+            if (handRoot == null || _handConfig == null || _handConfig.LipstickApplyPoint == null)
+            {
+                await MoveHandToAsync(targetApplyPointPosition, duration);
+                
+                return;
+            }
+
+            Vector3 applyPointOffset = _handConfig.LipstickApplyPoint.position - handRoot.position;
+            Vector3 targetHandRootPosition = targetApplyPointPosition - applyPointOffset;
+
+            await MoveHandToAsync(targetHandRootPosition, duration);
+        }
+        
         public async UniTask PlayBrushDipAnimationAsync()
         {
             Transform handRoot = _handConfig.HandRoot;
@@ -106,7 +123,87 @@ namespace _Project.Gameplay
 
             await _runtimeState.ActiveSequence.AsyncWaitForCompletion();
         }
+        
+        public async UniTask PlayLipstickApplyAnimationAsync(
+            Vector3 upperLipLeftPosition,
+            Vector3 upperLipRightPosition,
+            Vector3 lowerLipRightPosition,
+            Vector3 lowerLipLeftPosition,
+            float duration)
+        {
+            Transform handRoot = _handConfig.HandRoot;
 
+            if (handRoot == null)
+                return;
+
+            if (_handConfig == null || _handConfig.LipstickApplyPoint == null)
+            {
+                await PlayLipstickApplyAnimationWithoutOffsetAsync(
+                    upperLipLeftPosition,
+                    upperLipRightPosition,
+                    lowerLipRightPosition,
+                    lowerLipLeftPosition,
+                    duration);
+                
+                return;
+            }
+
+            _runtimeState.ActiveSequence?.Kill();
+
+            Vector3 applyPointOffset = _handConfig.LipstickApplyPoint.position - handRoot.position;
+            Vector3 upperLipLeftHandPosition = upperLipLeftPosition - applyPointOffset;
+            Vector3 upperLipRightHandPosition = upperLipRightPosition - applyPointOffset;
+            Vector3 lowerLipRightHandPosition = lowerLipRightPosition - applyPointOffset;
+            Vector3 lowerLipLeftHandPosition = lowerLipLeftPosition - applyPointOffset;
+
+            float halfDuration = duration * 0.5f;
+
+            _runtimeState.ActiveSequence = DOTween.Sequence();
+            _runtimeState.ActiveSequence.Append(handRoot.DOMove(
+                upperLipLeftHandPosition,
+                _motionConfig.BrushDipAnimationStepDuration));
+            _runtimeState.ActiveSequence.Append(handRoot.DOMove(
+                upperLipRightHandPosition,
+                halfDuration));
+            _runtimeState.ActiveSequence.Append(handRoot.DOMove(
+                lowerLipRightHandPosition,
+                _motionConfig.BrushDipAnimationStepDuration));
+            _runtimeState.ActiveSequence.Append(handRoot.DOMove(
+                lowerLipLeftHandPosition,
+                halfDuration));
+
+            await _runtimeState.ActiveSequence.AsyncWaitForCompletion();
+        }
+
+        private async UniTask PlayLipstickApplyAnimationWithoutOffsetAsync(
+            Vector3 upperLipLeftPosition,
+            Vector3 upperLipRightPosition,
+            Vector3 lowerLipRightPosition,
+            Vector3 lowerLipLeftPosition,
+            float duration)
+        {
+            Transform handRoot = _handConfig.HandRoot;
+
+            if (handRoot == null)
+                return;
+
+            _runtimeState.ActiveSequence?.Kill();
+
+            float halfDuration = duration * 0.5f;
+
+            _runtimeState.ActiveSequence = DOTween.Sequence();
+            _runtimeState.ActiveSequence.Append(handRoot.DOMove(
+                upperLipLeftPosition,
+                _motionConfig.BrushDipAnimationStepDuration));
+            _runtimeState.ActiveSequence.Append(handRoot.DOMove(upperLipRightPosition, halfDuration));
+            _runtimeState.ActiveSequence.Append(handRoot.DOMove(
+                lowerLipRightPosition,
+                _motionConfig.BrushDipAnimationStepDuration));
+            _runtimeState.ActiveSequence.Append(handRoot.DOMove(lowerLipLeftPosition, halfDuration));
+
+            await _runtimeState.ActiveSequence.AsyncWaitForCompletion();
+        }
+        
         public void UpdateDraggedHandPosition(Vector3 pointerWorldPosition)
         {
             Transform handRoot = _handConfig.HandRoot;
