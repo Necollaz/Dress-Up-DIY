@@ -2,9 +2,9 @@
 
 2D-проект на Unity с экраном механики макияжа: управление рукой перетаскиванием, нанесение крема, румян, теней и помады, сброс макияжа спонжем.
 
-<img src="docs/screenshots/gameplay_01.png" width="32%" />
-<img src="docs/screenshots/gameplay_02.png" width="32%" />
-<img src="docs/screenshots/gameplay_03.png" width="32%" />
+<img src="docs/screenshots/gameplay_01.png" width="25%" />
+<img src="docs/screenshots/gameplay_02.png" width="25%" />
+<img src="docs/screenshots/gameplay_03.png" width="25%" />
 
 <p align="center">
   <a href="https://drive.google.com/file/d/1qHLAU8uc0O13CvE7u94LgYx2UO89dqND/view?usp=sharing">
