@@ -44,7 +44,7 @@ namespace _Project.Gameplay
                 _blushConfig.BrushPickupPoint.position,
                 _motionConfig.AutomaticMoveDuration);
 
-            _visualState.SetBrushStandVisible(false);
+            _visualState.SetBlushBrushStandVisible(false);
             _visualState.SetBrushInHandVisible(true);
 
             _runtimeState.ProcessStageType = MakeupProcessStageType.WaitingForBlushColorSelection;
@@ -122,7 +122,7 @@ namespace _Project.Gameplay
             await _handMotion.MoveHandToAsync(_blushConfig.BrushPickupPoint.position, _motionConfig.AutomaticMoveDuration);
 
             _visualState.SetBrushInHandVisible(false);
-            _visualState.SetBrushStandVisible(true);
+            _visualState.SetBlushBrushStandVisible(true);
             _visualState.ResetBrushTipColor();
 
             await _handMotion.MoveHandToDefaultPointAsync();

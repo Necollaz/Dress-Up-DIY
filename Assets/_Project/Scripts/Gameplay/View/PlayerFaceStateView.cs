@@ -18,6 +18,10 @@ namespace _Project.Gameplay
         
         [Header("Lipstick")]
         [SerializeField] private SpriteRenderer[] _lipstickRenderers;
+        
+        [Header("Eyeshadow")]
+        [SerializeField] private SpriteRenderer[] _leftEyeshadowRenderers;
+        [SerializeField] private SpriteRenderer[] _rightEyeshadowRenderers;
 
         private void Awake()
         {
@@ -29,6 +33,7 @@ namespace _Project.Gameplay
             ResetCreamState();
             HideAllBlush();
             HideAllLipstick();
+            HideAllEyeshadow();
         }
 
         public async UniTask HideAcneAsync(float duration)
@@ -82,31 +87,7 @@ namespace _Project.Gameplay
 
             HideAllBlush();
 
-            selectedBlushRenderer.enabled = true;
-            selectedBlushRenderer.gameObject.SetActive(true);
-
-            Color startColor = selectedBlushRenderer.color;
-            startColor.a = HIDDEN_ALPHA;
-            selectedBlushRenderer.color = startColor;
-
-            float elapsedTime = 0f;
-
-            while (elapsedTime < duration)
-            {
-                elapsedTime += Time.deltaTime;
-
-                float progress = Mathf.Clamp01(elapsedTime / duration);
-
-                Color currentColor = selectedBlushRenderer.color;
-                currentColor.a = progress;
-                selectedBlushRenderer.color = currentColor;
-
-                await UniTask.Yield();
-            }
-
-            Color finalColor = selectedBlushRenderer.color;
-            finalColor.a = VISIBLE_ALPHA;
-            selectedBlushRenderer.color = finalColor;
+            await FadeInRendererAsync(selectedBlushRenderer, duration);
         }
         
         public async UniTask ShowLipstickAsync(int colorIndex, float duration)
@@ -116,12 +97,35 @@ namespace _Project.Gameplay
 
             HideAllLipstick();
 
-            selectedLipstickRenderer.enabled = true;
-            selectedLipstickRenderer.gameObject.SetActive(true);
+            await FadeInRendererAsync(selectedLipstickRenderer, duration);
+        }
+        
+        
+        public async UniTask ShowLeftEyeshadowAsync(int colorIndex, float duration)
+        {
+            if (TryGetLeftEyeshadowRenderer(colorIndex, out SpriteRenderer selectedRenderer) == false)
+                return;
 
-            Color startColor = selectedLipstickRenderer.color;
+            HideAllEyeshadow();
+            await FadeInRendererAsync(selectedRenderer, duration);
+        }
+
+        public async UniTask ShowRightEyeshadowAsync(int colorIndex, float duration)
+        {
+            if (TryGetRightEyeshadowRenderer(colorIndex, out SpriteRenderer selectedRenderer) == false)
+                return;
+
+            await FadeInRendererAsync(selectedRenderer, duration);
+        }
+        
+        private async UniTask FadeInRendererAsync(SpriteRenderer selectedRenderer, float duration)
+        {
+            selectedRenderer.enabled = true;
+            selectedRenderer.gameObject.SetActive(true);
+
+            Color startColor = selectedRenderer.color;
             startColor.a = HIDDEN_ALPHA;
-            selectedLipstickRenderer.color = startColor;
+            selectedRenderer.color = startColor;
 
             float elapsedTime = 0f;
 
@@ -131,16 +135,16 @@ namespace _Project.Gameplay
 
                 float progress = Mathf.Clamp01(elapsedTime / duration);
 
-                Color currentColor = selectedLipstickRenderer.color;
+                Color currentColor = selectedRenderer.color;
                 currentColor.a = progress;
-                selectedLipstickRenderer.color = currentColor;
+                selectedRenderer.color = currentColor;
 
                 await UniTask.Yield();
             }
 
-            Color finalColor = selectedLipstickRenderer.color;
+            Color finalColor = selectedRenderer.color;
             finalColor.a = VISIBLE_ALPHA;
-            selectedLipstickRenderer.color = finalColor;
+            selectedRenderer.color = finalColor;
         }
 
         private bool TryGetBlushRenderer(int colorIndex, out SpriteRenderer blushRenderer)
@@ -156,24 +160,54 @@ namespace _Project.Gameplay
             
             return blushRenderer != null;
         }
-        
+
         private bool TryGetLipstickRenderer(int colorIndex, out SpriteRenderer lipstickRenderer)
         {
             if (colorIndex < 0 || colorIndex >= _lipstickRenderers.Length)
             {
                 lipstickRenderer = null;
+                
                 return false;
             }
 
             lipstickRenderer = _lipstickRenderers[colorIndex];
+            
             return lipstickRenderer != null;
         }
-        
+
+        private bool TryGetLeftEyeshadowRenderer(int colorIndex, out SpriteRenderer eyeshadowRenderer)
+        {
+            if (colorIndex < 0 || colorIndex >= _leftEyeshadowRenderers.Length)
+            {
+                eyeshadowRenderer = null;
+                
+                return false;
+            }
+
+            eyeshadowRenderer = _leftEyeshadowRenderers[colorIndex];
+            
+            return eyeshadowRenderer != null;
+        }
+
+        private bool TryGetRightEyeshadowRenderer(int colorIndex, out SpriteRenderer eyeshadowRenderer)
+        {
+            if (colorIndex < 0 || colorIndex >= _rightEyeshadowRenderers.Length)
+            {
+                eyeshadowRenderer = null;
+                
+                return false;
+            }
+
+            eyeshadowRenderer = _rightEyeshadowRenderers[colorIndex];
+            
+            return eyeshadowRenderer != null;
+        }
+
         private void ResetCreamState()
         {
             if (_bodyWithAcneRenderer == null || _bodyClearRenderer == null)
                 return;
-            
+
             SetRendererAlpha(_bodyWithAcneRenderer, VISIBLE_ALPHA);
             SetRendererAlpha(_bodyClearRenderer, HIDDEN_ALPHA);
 
@@ -185,7 +219,7 @@ namespace _Project.Gameplay
                 SetRendererAlpha(_acneRenderers[index], VISIBLE_ALPHA);
             }
         }
-        
+
         private void HideAllBlush()
         {
             for (int index = 0; index < _blushRenderers.Length; index++)
@@ -202,7 +236,7 @@ namespace _Project.Gameplay
                 blushRenderer.color = hiddenColor;
             }
         }
-        
+
         private void HideAllLipstick()
         {
             for (int index = 0; index < _lipstickRenderers.Length; index++)
@@ -217,6 +251,29 @@ namespace _Project.Gameplay
                 Color hiddenColor = lipstickRenderer.color;
                 hiddenColor.a = HIDDEN_ALPHA;
                 lipstickRenderer.color = hiddenColor;
+            }
+        }
+
+        private void HideAllEyeshadow()
+        {
+            HideEyeshadowArray(_leftEyeshadowRenderers);
+            HideEyeshadowArray(_rightEyeshadowRenderers);
+        }
+
+        private void HideEyeshadowArray(SpriteRenderer[] eyeshadowRenderers)
+        {
+            for (int index = 0; index < eyeshadowRenderers.Length; index++)
+            {
+                SpriteRenderer renderer = eyeshadowRenderers[index];
+
+                if (renderer == null)
+                    continue;
+
+                renderer.enabled = false;
+
+                Color hiddenColor = renderer.color;
+                hiddenColor.a = HIDDEN_ALPHA;
+                renderer.color = hiddenColor;
             }
         }
 

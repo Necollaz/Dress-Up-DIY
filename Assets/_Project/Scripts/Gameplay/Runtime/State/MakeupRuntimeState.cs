@@ -13,8 +13,10 @@ namespace _Project.Gameplay
         
         public int SelectedBlushColorIndex { get; set; } = -1;
         public int SelectedLipstickColorIndex { get; set; } = -1;
+        public int SelectedEyeshadowColorIndex { get; set; } = -1;
         
         public bool IsBlushPageOpened { get; set; }
         public bool IsLipstickPageOpened { get; set; }
+        public bool IsEyeshadowPageOpened { get; set; }
     }
 }

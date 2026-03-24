@@ -94,6 +94,24 @@ namespace _Project.Gameplay
             await MoveHandToAsync(targetHandRootPosition, duration);
         }
         
+        public async UniTask MoveEyeshadowBrushTipToAsync(Vector3 targetBrushTipPosition, float duration)
+        {
+            Transform handRoot = _handConfig.HandRoot;
+            Transform brushTipPoint = _handConfig.EyeshadowBrushTipPoint;
+
+            if (handRoot == null || brushTipPoint == null)
+            {
+                await MoveHandToAsync(targetBrushTipPosition, duration);
+                
+                return;
+            }
+
+            Vector3 brushTipOffset = brushTipPoint.position - handRoot.position;
+            Vector3 targetHandRootPosition = targetBrushTipPosition - brushTipOffset;
+
+            await MoveHandToAsync(targetHandRootPosition, duration);
+        }
+        
         public async UniTask PlayBrushDipAnimationAsync()
         {
             Transform handRoot = _handConfig.HandRoot;

@@ -30,5 +30,15 @@ namespace _Project.Gameplay
         DraggingLipstickToFace = 21,
         ApplyingLipstick = 22,
         ReturningLipstick = 23,
+        
+        WaitingForEyeshadowBrushSelection = 24,
+        MovingHandToEyeshadowBrush = 25,
+        WaitingForEyeshadowColorSelection = 26,
+        MovingEyeshadowBrushToColor = 27,
+        MovingEyeshadowBrushToChestHoldPoint = 28,
+        WaitingForEyeshadowBrushDragStart = 29,
+        DraggingEyeshadowBrushToFace = 30,
+        ApplyingEyeshadow = 31,
+        ReturningEyeshadowBrush = 32,
     }
 }

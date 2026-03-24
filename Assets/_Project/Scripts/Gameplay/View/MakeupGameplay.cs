@@ -12,12 +12,12 @@ namespace _Project.Gameplay
         [SerializeField] private MakeupBookView _makeupBookView;
         [SerializeField] private PlayerFaceStateView _playerFaceStateView;
 
-        [Header("Configs")]
-        [SerializeField] private MakeupHandConfig _handConfig;
+        [Header("Configs")] [SerializeField] private MakeupHandConfig _handConfig;
         [SerializeField] private MakeupMotionConfig _motionConfig;
         [SerializeField] private CreamMakeupConfig _creamConfig;
         [SerializeField] private BlushMakeupConfig _blushConfig;
         [SerializeField] private LipstickMakeupConfig _lipstickConfig;
+        [SerializeField] private EyeshadowMakeupConfig _eyeshadowConfig;
 
         private MakeupRuntimeState _runtimeState;
         private MakeupPointerInput _pointerInput;
@@ -26,12 +26,22 @@ namespace _Project.Gameplay
         private CreamMakeupFlow _creamMakeupFlow;
         private BlushMakeupFlow _blushMakeupFlow;
         private LipstickMakeupFlow _lipstickMakeupFlow;
+        private EyeshadowMakeupFlow _eyeshadowMakeupFlow;
 
         private void Awake()
         {
             _runtimeState = new MakeupRuntimeState();
-            _pointerInput = new MakeupPointerInput(_mainCamera, _makeupBookView, _blushConfig, _lipstickConfig);
-            _visualState = new MakeupVisualState(_handConfig, _creamConfig, _blushConfig, _runtimeState);
+            _pointerInput = new MakeupPointerInput(
+                _mainCamera,
+                _makeupBookView,
+                _blushConfig,
+                _lipstickConfig,
+                _eyeshadowConfig);
+            _visualState = new MakeupVisualState(_handConfig,
+                _creamConfig,
+                _blushConfig,
+                _eyeshadowConfig,
+                _runtimeState);
             _handMotion = new MakeupHandMotion(_handConfig, _motionConfig, _runtimeState);
             _creamMakeupFlow = new CreamMakeupFlow(
                 _creamConfig,
@@ -54,10 +64,18 @@ namespace _Project.Gameplay
                 _runtimeState,
                 _visualState,
                 _handMotion);
+            _eyeshadowMakeupFlow = new EyeshadowMakeupFlow(
+                _eyeshadowConfig,
+                _motionConfig,
+                _playerFaceStateView,
+                _runtimeState,
+                _visualState,
+                _handMotion);
 
             _runtimeState.ProcessStageType = MakeupProcessStageType.Idle;
             _runtimeState.IsBlushPageOpened = false;
             _runtimeState.IsLipstickPageOpened = false;
+            _runtimeState.IsEyeshadowPageOpened = false;
 
             _visualState.ResetActiveToolState();
             _playerFaceStateView?.ResetFaceState();
@@ -121,6 +139,26 @@ namespace _Project.Gameplay
                         MakeupProcessStageType.WaitingForLipstickDragStart,
                         _lipstickMakeupFlow.ApplyLipstickAsync).Forget();
                     break;
+
+                case MakeupProcessStageType.WaitingForEyeshadowBrushSelection:
+                    ProcessEyeshadowBrushSelectionInput();
+                    break;
+
+                case MakeupProcessStageType.WaitingForEyeshadowColorSelection:
+                    ProcessEyeshadowPaletteColorInput();
+                    break;
+
+                case MakeupProcessStageType.WaitingForEyeshadowBrushDragStart:
+                    ProcessEyeshadowPaletteColorInput();
+                    ProcessEyeshadowBrushDragStartInput();
+                    break;
+
+                case MakeupProcessStageType.DraggingEyeshadowBrushToFace:
+                    ProcessHandDragging(
+                        _eyeshadowConfig.FaceZone,
+                        MakeupProcessStageType.WaitingForEyeshadowBrushDragStart,
+                        _eyeshadowMakeupFlow.ApplyEyeshadowAsync).Forget();
+                    break;
             }
         }
 
@@ -148,6 +186,16 @@ namespace _Project.Gameplay
 
                 if (_runtimeState.IsLipstickPageOpened == false)
                     OpenLipstickPageAsync().Forget();
+
+                return;
+            }
+
+            if (selectedTabView.PageType == MakeupBookPageType.Eyeshadow)
+            {
+                _makeupBookView.SelectPage(MakeupBookPageType.Eyeshadow);
+
+                if (_runtimeState.IsEyeshadowPageOpened == false)
+                    OpenEyeshadowPageAsync().Forget();
 
                 return;
             }
@@ -196,7 +244,7 @@ namespace _Project.Gameplay
                 if (collidersUnderPointer[index] == _blushConfig.BrushStandTapZone)
                 {
                     _blushMakeupFlow.TakeBrushAsync().Forget();
-                    
+
                     return;
                 }
             }
@@ -228,12 +276,12 @@ namespace _Project.Gameplay
                 {
                     _runtimeState.ProcessStageType = MakeupProcessStageType.DraggingBrushToFace;
                     _runtimeState.DragVelocity = Vector3.zero;
-                    
+
                     return;
                 }
             }
         }
-        
+
         private void ProcessLipstickPaletteColorInput()
         {
             if (_pointerInput.IsLeftMousePressedThisFrame() == false || _pointerInput.IsPointerBlockedByUi())
@@ -260,7 +308,57 @@ namespace _Project.Gameplay
                 {
                     _runtimeState.ProcessStageType = MakeupProcessStageType.DraggingLipstickToFace;
                     _runtimeState.DragVelocity = Vector3.zero;
-                    
+
+                    return;
+                }
+            }
+        }
+
+        private void ProcessEyeshadowBrushSelectionInput()
+        {
+            if (_pointerInput.IsLeftMousePressedThisFrame() == false || _pointerInput.IsPointerBlockedByUi())
+                return;
+
+            Collider2D[] collidersUnderPointer = _pointerInput.GetCollidersUnderPointer();
+
+            for (int index = 0; index < collidersUnderPointer.Length; index++)
+            {
+                if (collidersUnderPointer[index] == _eyeshadowConfig.BrushStandTapZone)
+                {
+                    _eyeshadowMakeupFlow.TakeBrushAsync().Forget();
+
+                    return;
+                }
+            }
+        }
+
+        private void ProcessEyeshadowPaletteColorInput()
+        {
+            if (_pointerInput.IsLeftMousePressedThisFrame() == false || _pointerInput.IsPointerBlockedByUi())
+                return;
+
+            if (_pointerInput.TryGetEyeshadowColor(
+                    out EyeshadowPaletteColorView selectedColorView,
+                    out int selectedColorIndex))
+            {
+                _eyeshadowMakeupFlow.SelectEyeshadowColorAsync(selectedColorView, selectedColorIndex).Forget();
+            }
+        }
+
+        private void ProcessEyeshadowBrushDragStartInput()
+        {
+            if (_pointerInput.IsLeftMousePressedThisFrame() == false || _pointerInput.IsPointerBlockedByUi())
+                return;
+
+            Collider2D[] collidersUnderPointer = _pointerInput.GetCollidersUnderPointer();
+
+            for (int index = 0; index < collidersUnderPointer.Length; index++)
+            {
+                if (collidersUnderPointer[index] == _handConfig.HandDragZone)
+                {
+                    _runtimeState.ProcessStageType = MakeupProcessStageType.DraggingEyeshadowBrushToFace;
+                    _runtimeState.DragVelocity = Vector3.zero;
+
                     return;
                 }
             }
@@ -270,36 +368,57 @@ namespace _Project.Gameplay
         {
             _runtimeState.IsBlushPageOpened = true;
             _runtimeState.IsLipstickPageOpened = false;
+            _runtimeState.IsEyeshadowPageOpened = false;
             _runtimeState.ProcessStageType = MakeupProcessStageType.ReturningToolBeforeSwitch;
 
             await ReturnActiveToolToStandAsync();
 
-            _visualState.SetBrushStandVisible(true);
-            
+            _visualState.HideAllBookBrushStands();
+            _visualState.SetBlushBrushStandVisible(true);
+
             _runtimeState.ProcessStageType = MakeupProcessStageType.WaitingForBrushSelection;
         }
-        
+
         private async UniTaskVoid OpenLipstickPageAsync()
         {
             _runtimeState.IsLipstickPageOpened = true;
             _runtimeState.IsBlushPageOpened = false;
+            _runtimeState.IsEyeshadowPageOpened = false;
             _runtimeState.ProcessStageType = MakeupProcessStageType.ReturningToolBeforeSwitch;
 
             await ReturnActiveToolToStandAsync();
 
+            _visualState.HideAllBookBrushStands();
+
             _runtimeState.ProcessStageType = MakeupProcessStageType.WaitingForLipstickSelection;
         }
 
-        private async UniTaskVoid CloseBlushPageAsync()
+        private async UniTaskVoid OpenEyeshadowPageAsync()
         {
+            _runtimeState.IsEyeshadowPageOpened = true;
             _runtimeState.IsBlushPageOpened = false;
             _runtimeState.IsLipstickPageOpened = false;
             _runtimeState.ProcessStageType = MakeupProcessStageType.ReturningToolBeforeSwitch;
 
             await ReturnActiveToolToStandAsync();
 
-            _visualState.SetBrushStandVisible(false);
-            
+            _visualState.HideAllBookBrushStands();
+            _visualState.SetEyeshadowBrushStandVisible(true);
+
+            _runtimeState.ProcessStageType = MakeupProcessStageType.WaitingForEyeshadowBrushSelection;
+        }
+
+        private async UniTaskVoid CloseBlushPageAsync()
+        {
+            _runtimeState.IsBlushPageOpened = false;
+            _runtimeState.IsLipstickPageOpened = false;
+            _runtimeState.IsEyeshadowPageOpened = false;
+            _runtimeState.ProcessStageType = MakeupProcessStageType.ReturningToolBeforeSwitch;
+
+            await ReturnActiveToolToStandAsync();
+
+            _visualState.HideAllBookBrushStands();
+
             _runtimeState.ProcessStageType = MakeupProcessStageType.Idle;
         }
 
@@ -307,14 +426,17 @@ namespace _Project.Gameplay
         {
             _runtimeState.ProcessStageType = MakeupProcessStageType.ReturningToolBeforeSwitch;
 
-            if (_runtimeState.IsBlushPageOpened || _runtimeState.IsLipstickPageOpened)
+            if (_runtimeState.IsBlushPageOpened || _runtimeState.IsLipstickPageOpened ||
+                _runtimeState.IsEyeshadowPageOpened)
                 _makeupBookView?.SelectPage(MakeupBookPageType.None);
 
             _runtimeState.IsBlushPageOpened = false;
             _runtimeState.IsLipstickPageOpened = false;
+            _runtimeState.IsEyeshadowPageOpened = false;
 
-            _visualState.SetBrushStandVisible(false);
+            _visualState.HideAllBookBrushStands();
             _visualState.ResetBrushTipColor();
+            _visualState.ResetEyeshadowBrushTipColor();
             _visualState.ResetLipstickInHandSprite();
 
             await ReturnActiveToolToStandAsync();
@@ -336,7 +458,7 @@ namespace _Project.Gameplay
 
                 _visualState.SetCreamInHandVisible(false);
                 _visualState.SetCreamStandVisible(true);
-                
+
                 await _handMotion.MoveHandToDefaultPointAsync();
             }
             else if (_visualState.IsBrushInHandVisible())
@@ -350,28 +472,69 @@ namespace _Project.Gameplay
 
                 _visualState.SetBrushInHandVisible(false);
                 _visualState.ResetBrushTipColor();
-                _visualState.SetBrushStandVisible(_runtimeState.IsBlushPageOpened);
-                
+
+                _visualState.HideAllBookBrushStands();
+                _visualState.SetBlushBrushStandVisible(_runtimeState.IsBlushPageOpened);
+
                 await _handMotion.MoveHandToDefaultPointAsync();
             }
             else if (_visualState.IsLipstickInHandVisible())
             {
                 await _lipstickMakeupFlow.ReturnSelectedLipstickToBookAsync();
+
+                _visualState.HideAllBookBrushStands();
+
+                if (_runtimeState.IsBlushPageOpened)
+                    _visualState.SetBlushBrushStandVisible(true);
+
+                if (_runtimeState.IsEyeshadowPageOpened)
+                    _visualState.SetEyeshadowBrushStandVisible(true);
+            }
+            else if (_visualState.IsEyeshadowBrushInHandVisible())
+            {
+                if (_eyeshadowConfig.BrushPickupPoint != null)
+                {
+                    await _handMotion.MoveHandToAsync(
+                        _eyeshadowConfig.BrushPickupPoint.position,
+                        _motionConfig.AutomaticMoveDuration);
+                }
+
+                _visualState.SetEyeshadowBrushInHandVisible(false);
+                _visualState.ResetEyeshadowBrushTipColor();
+
+                _visualState.HideAllBookBrushStands();
+                _visualState.SetEyeshadowBrushStandVisible(_runtimeState.IsEyeshadowPageOpened);
+
+                await _handMotion.MoveHandToDefaultPointAsync();
             }
             else
             {
                 _visualState.SetCreamInHandVisible(false);
                 _visualState.SetCreamStandVisible(true);
+
                 _visualState.SetBrushInHandVisible(false);
-                _visualState.SetBrushStandVisible(false);
-                _visualState.SetLipstickInHandVisible(false);
                 _visualState.ResetBrushTipColor();
+
+                _visualState.SetLipstickInHandVisible(false);
                 _visualState.ResetLipstickInHandSprite();
+
+                _visualState.SetEyeshadowBrushInHandVisible(false);
+                _visualState.ResetEyeshadowBrushTipColor();
+
+                _visualState.HideAllBookBrushStands();
+
+                if (_runtimeState.IsBlushPageOpened)
+                    _visualState.SetBlushBrushStandVisible(true);
+
+                if (_runtimeState.IsEyeshadowPageOpened)
+                    _visualState.SetEyeshadowBrushStandVisible(true);
+
                 _visualState.MoveHandToDefaultPointImmediately();
             }
 
             _runtimeState.SelectedBlushColorIndex = -1;
             _runtimeState.SelectedLipstickColorIndex = -1;
+            _runtimeState.SelectedEyeshadowColorIndex = -1;
             _runtimeState.DragVelocity = Vector3.zero;
         }
 
@@ -392,7 +555,7 @@ namespace _Project.Gameplay
             if (_pointerInput.TryGetPointerWorldPosition(out Vector3 releaseWorldPosition) == false)
             {
                 _runtimeState.ProcessStageType = fallbackStageType;
-                
+
                 return;
             }
 
@@ -401,7 +564,7 @@ namespace _Project.Gameplay
             if (isReleasedInsideFaceZone)
             {
                 await applyAction();
-                
+
                 return;
             }
 

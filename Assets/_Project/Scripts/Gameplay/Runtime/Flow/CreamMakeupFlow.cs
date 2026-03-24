@@ -44,6 +44,10 @@ namespace _Project.Gameplay
 
                 case MakeupProcessStageType.WaitingForLipstickSelection:
                 case MakeupProcessStageType.WaitingForLipstickDragStart:
+
+                case MakeupProcessStageType.WaitingForEyeshadowBrushSelection:
+                case MakeupProcessStageType.WaitingForEyeshadowColorSelection:
+                case MakeupProcessStageType.WaitingForEyeshadowBrushDragStart:
                     return true;
 
                 default:

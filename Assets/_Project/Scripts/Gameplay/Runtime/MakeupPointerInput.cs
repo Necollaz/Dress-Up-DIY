@@ -11,17 +11,20 @@ namespace _Project.Gameplay
         private readonly MakeupBookView _makeupBookView;
         private readonly BlushMakeupConfig _blushConfig;
         private readonly LipstickMakeupConfig _lipstickConfig;
+        private readonly EyeshadowMakeupConfig _eyeshadowConfig;
 
         public MakeupPointerInput(
             Camera mainCamera,
             MakeupBookView makeupBookView,
             BlushMakeupConfig blushConfig,
-            LipstickMakeupConfig lipstickConfig)
+            LipstickMakeupConfig lipstickConfig,
+            EyeshadowMakeupConfig eyeshadowConfig)
         {
             _mainCamera = mainCamera;
             _makeupBookView = makeupBookView;
             _blushConfig = blushConfig;
             _lipstickConfig = lipstickConfig;
+            _eyeshadowConfig = eyeshadowConfig;
         }
 
         public bool IsLeftMousePressedThisFrame() => 
@@ -120,7 +123,9 @@ namespace _Project.Gameplay
             return false;
         }
         
-        public bool TryGetLipstickSample(out LipstickPaletteColorView selectedLipstickView, out int selectedLipstickIndex)
+        public bool TryGetLipstickSample(
+            out LipstickPaletteColorView selectedLipstickView,
+            out int selectedLipstickIndex)
         {
             selectedLipstickView = null;
             selectedLipstickIndex = -1;
@@ -149,6 +154,44 @@ namespace _Project.Gameplay
                     {
                         selectedLipstickView = colorView;
                         selectedLipstickIndex = colorIndex;
+                        
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+        
+        public bool TryGetEyeshadowColor(out EyeshadowPaletteColorView selectedColorView, out int selectedColorIndex)
+        {
+            selectedColorView = null;
+            selectedColorIndex = -1;
+
+            if (_eyeshadowConfig == null)
+                return false;
+
+            if (TryGetPointerWorldPosition(out Vector3 pointerWorldPosition) == false)
+                return false;
+
+            Collider2D[] collidersUnderPointer = Physics2D.OverlapPointAll(pointerWorldPosition);
+            EyeshadowPaletteColorView[] paletteColors = _eyeshadowConfig.PaletteColors;
+
+            for (int colliderIndex = 0; colliderIndex < collidersUnderPointer.Length; colliderIndex++)
+            {
+                Collider2D currentCollider = collidersUnderPointer[colliderIndex];
+
+                for (int colorIndex = 0; colorIndex < paletteColors.Length; colorIndex++)
+                {
+                    EyeshadowPaletteColorView colorView = paletteColors[colorIndex];
+
+                    if (colorView == null)
+                        continue;
+
+                    if (colorView.TapZone == currentCollider)
+                    {
+                        selectedColorView = colorView;
+                        selectedColorIndex = colorIndex;
                         
                         return true;
                     }
