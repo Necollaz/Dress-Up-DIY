@@ -4198,6 +4198,8 @@ MonoBehaviour:
     _eyeshadowBrushInHandRenderer: {fileID: 43841585}
     _eyeshadowBrushTipRenderer: {fileID: 873440566}
     _defaultEyeshadowBrushTipColor: {r: 1, g: 1, b: 1, a: 1}
+  _spongeConfig:
+    _spongeTapZone: {fileID: 641825946}
   _motionConfig:
     _automaticMoveDuration: 0.35
     _dragSmoothTime: 0.04

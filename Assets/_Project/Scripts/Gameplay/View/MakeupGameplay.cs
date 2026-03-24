@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using UnityEngine.Serialization;
 
 namespace _Project.Gameplay
 {
@@ -12,7 +11,9 @@ namespace _Project.Gameplay
         [SerializeField] private MakeupBookView _makeupBookView;
         [SerializeField] private PlayerFaceStateView _playerFaceStateView;
 
-        [Header("Configs")] [SerializeField] private MakeupHandConfig _handConfig;
+        [Header("Configs")]
+        [SerializeField] private MakeupHandConfig _handConfig;
+        [SerializeField] private SpongeMakeupConfig _spongeConfig;
         [SerializeField] private MakeupMotionConfig _motionConfig;
         [SerializeField] private CreamMakeupConfig _creamConfig;
         [SerializeField] private BlushMakeupConfig _blushConfig;
@@ -89,6 +90,7 @@ namespace _Project.Gameplay
         private void Update()
         {
             ProcessBookTabInput();
+            ProcessSpongeSelectionInput();
             ProcessCreamSelectionInput();
 
             switch (_runtimeState.ProcessStageType)
@@ -205,6 +207,27 @@ namespace _Project.Gameplay
             CloseBlushPageAsync().Forget();
         }
 
+        private void ProcessSpongeSelectionInput()
+        {
+            if (_pointerInput.IsLeftMousePressedThisFrame() == false || _pointerInput.IsPointerBlockedByUi())
+                return;
+
+            if (_spongeConfig == null || _spongeConfig.SpongeTapZone == null)
+                return;
+
+            Collider2D[] collidersUnderPointer = _pointerInput.GetCollidersUnderPointer();
+
+            for (int index = 0; index < collidersUnderPointer.Length; index++)
+            {
+                if (collidersUnderPointer[index] == _spongeConfig.SpongeTapZone)
+                {
+                    ClearMakeupBySpongeAsync().Forget();
+                    
+                    return;
+                }
+            }
+        }
+        
         private void ProcessCreamSelectionInput()
         {
             if (_pointerInput.IsLeftMousePressedThisFrame() == false ||
@@ -569,6 +592,31 @@ namespace _Project.Gameplay
             }
 
             _runtimeState.ProcessStageType = fallbackStageType;
+        }
+        
+        private async UniTaskVoid ClearMakeupBySpongeAsync()
+        {
+            _runtimeState.ProcessStageType = MakeupProcessStageType.ReturningToolBeforeSwitch;
+
+            await ReturnActiveToolToStandAsync();
+
+            _playerFaceStateView?.ResetFaceState();
+
+            _runtimeState.ProcessStageType = GetWaitingStageForCurrentOpenedPage();
+        }
+        
+        private MakeupProcessStageType GetWaitingStageForCurrentOpenedPage()
+        {
+            if (_runtimeState.IsBlushPageOpened)
+                return MakeupProcessStageType.WaitingForBrushSelection;
+
+            if (_runtimeState.IsLipstickPageOpened)
+                return MakeupProcessStageType.WaitingForLipstickSelection;
+
+            if (_runtimeState.IsEyeshadowPageOpened)
+                return MakeupProcessStageType.WaitingForEyeshadowBrushSelection;
+
+            return MakeupProcessStageType.Idle;
         }
     }
 }
