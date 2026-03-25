@@ -8,7 +8,6 @@ namespace _Project.Gameplay.Makeup.Configs.SceneRefs
     public sealed class BlushMakeupSceneReferences
     {
         [SerializeField] private BlushPaletteColorView[] _paletteColors;
-        [SerializeField] private Collider2D _brushStandTapZone;
         [SerializeField] private SpriteRenderer _brushStandRenderer;
         [SerializeField] private Collider2D _faceZone;
 
@@ -18,7 +17,6 @@ namespace _Project.Gameplay.Makeup.Configs.SceneRefs
         [SerializeField] private Transform _faceApplyPoint;
 
         public BlushPaletteColorView[] PaletteColors => _paletteColors;
-        public Collider2D BrushStandTapZone => _brushStandTapZone;
         public SpriteRenderer BrushStandRenderer => _brushStandRenderer;
         public Collider2D FaceZone => _faceZone;
 

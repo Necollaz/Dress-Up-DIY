@@ -9,7 +9,6 @@ namespace _Project.Gameplay.Makeup.Configs.SceneRefs
     {
         [SerializeField] private EyeshadowPaletteColorView[] _paletteColors;
         [SerializeField] private SpriteRenderer _brushStandRenderer;
-        [SerializeField] private Collider2D _brushStandTapZone;
         [SerializeField] private Collider2D _faceZone;
 
         [Space(10)]
@@ -22,7 +21,6 @@ namespace _Project.Gameplay.Makeup.Configs.SceneRefs
 
         public EyeshadowPaletteColorView[] PaletteColors => _paletteColors;
         public SpriteRenderer BrushStandRenderer => _brushStandRenderer;
-        public Collider2D BrushStandTapZone => _brushStandTapZone;
         public Collider2D FaceZone => _faceZone;
 
         public Transform BrushPickupPoint => _brushPickupPoint;

@@ -7,7 +7,6 @@ namespace _Project.Gameplay.Makeup.ToolFlow
     public interface IToolFlowContract
     {
         public Collider2D FaceZone { get; }
-        public MakeupProcessStageType DragStageType { get; }
         public MakeupProcessStageType DragFallbackStageType { get; }
 
         public UniTask ApplyAsync();

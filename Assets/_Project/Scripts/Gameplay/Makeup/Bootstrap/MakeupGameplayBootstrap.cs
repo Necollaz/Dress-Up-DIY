@@ -1,8 +1,5 @@
 using System;
-using UnityEngine;
 using DG.Tweening;
-using _Project.Gameplay.Makeup.Configs.SceneRefs;
-using _Project.Gameplay.Makeup.Configs.Settings;
 using _Project.Gameplay.Makeup.Data;
 using _Project.Gameplay.Makeup.Hand;
 using _Project.Gameplay.Makeup.Input;
@@ -16,146 +13,139 @@ namespace _Project.Gameplay.Makeup.Boostrap
     public sealed class MakeupGameplayBootstrap : IDisposable
     {
         private readonly PlayerFaceStateView _playerFaceStateView;
+        private readonly MakeupRuntimeState _runtimeState;
+        private readonly MakeupActionSequencer _actionSequencer;
+        private readonly MakeupPointerInputSource _pointerInputSource;
+        private readonly MakeupVisualState _visualState;
+        private readonly HandMotionFacade _handMotionFacade;
+        private readonly ActiveToolReturnSequence _toolReturnSequence;
+        private readonly CreamToolFlow _creamToolFlow;
+        private readonly BlushToolFlow _blushToolFlow;
+        private readonly LipstickToolFlow _lipstickToolFlow;
+        private readonly EyeshadowToolFlow _eyeshadowToolFlow;
 
-        public MakeupGameplayBootstrap(
-            Camera mainCamera,
-            MakeupBookView makeupBookView,
-            PlayerFaceStateView playerFaceStateView,
-            MakeupHandConfig handConfig,
-            SpongeMakeupConfig spongeConfig,
-            CreamMakeupSceneReferences creamSceneReferences,
-            BlushMakeupSceneReferences blushSceneReferences,
-            LipstickMakeupSceneReferences lipstickSceneReferences,
-            EyeshadowMakeupSceneReferences eyeshadowSceneReferences,
-            MakeupMotionSettings motionSettings,
-            CreamMakeupSettings creamSettings,
-            BlushMakeupSettings blushSettings,
-            LipstickMakeupSettings lipstickSettings,
-            EyeshadowMakeupSettings eyeshadowSettings)
+        public MakeupGameplayBootstrap(MakeupGameplayBootstrapData bootstrapData)
         {
-            _playerFaceStateView = playerFaceStateView;
+            _playerFaceStateView = bootstrapData.PlayerFaceStateView;
 
-            RuntimeState = new MakeupRuntimeState();
-            ActionSequencer = new MakeupActionSequencer();
-            PointerInputSource = new MakeupPointerInputSource(mainCamera);
+            _runtimeState = new MakeupRuntimeState();
+            _actionSequencer = new MakeupActionSequencer();
+            _pointerInputSource = new MakeupPointerInputSource(bootstrapData.MainCamera);
             MakeupPointerWorldHit pointerWorldHit = new MakeupPointerWorldHit();
             MakeupPointerSelection pointerSelection = new MakeupPointerSelection(
-                makeupBookView,
-                blushSceneReferences,
-                lipstickSceneReferences,
-                eyeshadowSceneReferences);
-            PointerInput = new MakeupPointerInput(PointerInputSource, pointerWorldHit, pointerSelection);
+                bootstrapData.MakeupBookView,
+                bootstrapData.BlushSceneReferences,
+                bootstrapData.LipstickSceneReferences,
+                bootstrapData.EyeshadowSceneReferences);
+            PointerInput = new MakeupPointerInput(_pointerInputSource, pointerWorldHit, pointerSelection);
             MakeupToolVisibility toolVisibility = new MakeupToolVisibility(
-                handConfig,
-                creamSceneReferences,
-                blushSceneReferences,
-                eyeshadowSceneReferences);
-            MakeupToolAppearance toolAppearance = new MakeupToolAppearance(handConfig);
-            HandDefaultPosePlacement handDefaultPosePlacement = new HandDefaultPosePlacement(handConfig);
-            VisualState = new MakeupVisualState(
-                RuntimeState,
-                toolVisibility,
-                toolAppearance,
-                handDefaultPosePlacement);
-            HandPositionTween handPositionTween = new HandPositionTween(handConfig, motionSettings);
-            HandGestureTween handGestureTween = new HandGestureTween(handConfig, motionSettings, RuntimeState);
-            HandDragSmoothing handDragSmoothing = new HandDragSmoothing(handConfig, motionSettings, RuntimeState);
-            HandMotionFacade = new HandMotionFacade(handPositionTween, handGestureTween, handDragSmoothing);
-            ToolReturnSequence = new ActiveToolReturnSequence(
-                creamSceneReferences,
-                blushSceneReferences,
-                eyeshadowSceneReferences,
-                motionSettings,
-                RuntimeState,
-                VisualState,
-                HandMotionFacade);
-            CreamToolFlow = new CreamToolFlow(
-                creamSettings,
-                creamSceneReferences,
-                motionSettings,
-                playerFaceStateView,
-                RuntimeState,
-                VisualState,
-                HandMotionFacade,
-                ToolReturnSequence);
-            BlushToolFlow = new BlushToolFlow(
-                blushSettings,
-                blushSceneReferences,
-                motionSettings,
-                playerFaceStateView,
-                RuntimeState,
-                VisualState,
-                HandMotionFacade,
-                ToolReturnSequence);
-            LipstickToolFlow = new LipstickToolFlow(
-                lipstickSettings,
-                lipstickSceneReferences,
-                motionSettings,
-                playerFaceStateView,
-                RuntimeState,
-                VisualState,
-                HandMotionFacade,
-                ToolReturnSequence);
-            EyeshadowToolFlow = new EyeshadowToolFlow(
-                eyeshadowSettings,
-                eyeshadowSceneReferences,
-                motionSettings,
-                playerFaceStateView,
-                RuntimeState,
-                VisualState,
-                HandMotionFacade,
-                ToolReturnSequence);
+                bootstrapData.HandConfig,
+                bootstrapData.CreamSceneReferences,
+                bootstrapData.BlushSceneReferences,
+                bootstrapData.EyeshadowSceneReferences);
+            MakeupToolAppearance toolAppearance = new MakeupToolAppearance(bootstrapData.HandConfig);
+            HandDefaultPosePlacement handDefaultPosePlacement = new HandDefaultPosePlacement(bootstrapData.HandConfig);
+            _visualState = new MakeupVisualState(_runtimeState, toolVisibility, toolAppearance, handDefaultPosePlacement);
+            HandPositionTween handPositionTween = new HandPositionTween(
+                bootstrapData.HandConfig, 
+                bootstrapData.MotionSettings);
+            HandGestureTween handGestureTween = new HandGestureTween(
+                bootstrapData.HandConfig,
+                bootstrapData.MotionSettings,
+                _runtimeState);
+            HandDragSmoothing handDragSmoothing = new HandDragSmoothing(
+                bootstrapData.HandConfig,
+                bootstrapData.MotionSettings,
+                _runtimeState);
+            _handMotionFacade = new HandMotionFacade(
+                handPositionTween,
+                handGestureTween,
+                handDragSmoothing);
+            _toolReturnSequence = new ActiveToolReturnSequence(
+                bootstrapData.CreamSceneReferences,
+                bootstrapData.BlushSceneReferences,
+                bootstrapData.EyeshadowSceneReferences,
+                bootstrapData.MotionSettings,
+                _runtimeState,
+                _visualState,
+                _handMotionFacade);
+            _creamToolFlow = new CreamToolFlow(
+                bootstrapData.CreamSettings,
+                bootstrapData.CreamSceneReferences,
+                bootstrapData.MotionSettings,
+                bootstrapData.PlayerFaceStateView,
+                _runtimeState,
+                _visualState,
+                _handMotionFacade,
+                _toolReturnSequence);
+            _blushToolFlow = new BlushToolFlow(
+                bootstrapData.BlushSettings,
+                bootstrapData.BlushSceneReferences,
+                bootstrapData.MotionSettings,
+                bootstrapData.PlayerFaceStateView,
+                _runtimeState,
+                _visualState,
+                _handMotionFacade,
+                _toolReturnSequence);
+            _lipstickToolFlow = new LipstickToolFlow(
+                bootstrapData.LipstickSettings,
+                bootstrapData.LipstickSceneReferences,
+                bootstrapData.MotionSettings,
+                bootstrapData.PlayerFaceStateView,
+                _runtimeState,
+                _visualState,
+                _handMotionFacade,
+                _toolReturnSequence);
+            _eyeshadowToolFlow = new EyeshadowToolFlow(
+                bootstrapData.EyeshadowSettings,
+                bootstrapData.EyeshadowSceneReferences,
+                bootstrapData.MotionSettings,
+                bootstrapData.PlayerFaceStateView,
+                _runtimeState,
+                _visualState,
+                _handMotionFacade,
+                _toolReturnSequence);
             TapFlow = new MakeupTapFlow(
-                RuntimeState,
+                _runtimeState,
                 PointerInput,
-                ActionSequencer,
-                makeupBookView,
-                playerFaceStateView,
-                spongeConfig,
-                creamSettings,
-                creamSceneReferences,
-                ToolReturnSequence,
-                CreamToolFlow);
+                _actionSequencer,
+                bootstrapData.MakeupBookView,
+                bootstrapData.PlayerFaceStateView,
+                bootstrapData.SpongeConfig,
+                bootstrapData.CreamSettings,
+                bootstrapData.CreamSceneReferences,
+                _toolReturnSequence,
+                _creamToolFlow);
             StageInputFlow = new MakeupStageInputFlow(
-                RuntimeState,
+                _runtimeState,
                 PointerInput,
-                ActionSequencer,
-                handConfig,
-                HandMotionFacade,
-                CreamToolFlow,
-                BlushToolFlow,
-                LipstickToolFlow,
-                EyeshadowToolFlow);
+                _actionSequencer,
+                bootstrapData.HandConfig,
+                _handMotionFacade,
+                _creamToolFlow,
+                _blushToolFlow,
+                _lipstickToolFlow,
+                _eyeshadowToolFlow);
         }
-
-        public MakeupRuntimeState RuntimeState { get; }
-        public MakeupActionSequencer ActionSequencer { get; }
-        public MakeupPointerInputSource PointerInputSource { get; }
+        
         public MakeupPointerInput PointerInput { get; }
-        public MakeupVisualState VisualState { get; }
-        public HandMotionFacade HandMotionFacade { get; }
-        public ActiveToolReturnSequence ToolReturnSequence { get; }
-        public CreamToolFlow CreamToolFlow { get; }
-        public BlushToolFlow BlushToolFlow { get; }
-        public LipstickToolFlow LipstickToolFlow { get; }
-        public EyeshadowToolFlow EyeshadowToolFlow { get; }
         public MakeupTapFlow TapFlow { get; }
         public MakeupStageInputFlow StageInputFlow { get; }
 
         public void Dispose()
         {
-            RuntimeState.ActiveSequence?.Kill();
-            PointerInputSource?.Dispose();
+            _runtimeState.ActiveSequence?.Kill();
+            _pointerInputSource?.Dispose();
         }
 
         public void ApplyInitialState()
         {
-            RuntimeState.ProcessStageType = MakeupProcessStageType.Idle;
-            RuntimeState.OpenedBookPageType = MakeupBookPageType.None;
-            RuntimeState.ActiveToolType = MakeupToolType.None;
+            _runtimeState.ProcessStageType = MakeupProcessStageType.Idle;
+            _runtimeState.OpenedBookPageType = MakeupBookPageType.None;
+            _runtimeState.ActiveToolType = MakeupToolType.None;
 
-            VisualState.ResetActiveToolState();
-            ToolReturnSequence.ApplyIdleVisualStateForOpenedPage();
+            _visualState.ResetActiveToolState();
+            _toolReturnSequence.ApplyIdleVisualStateForOpenedPage();
             _playerFaceStateView?.ResetFaceState();
         }
     }

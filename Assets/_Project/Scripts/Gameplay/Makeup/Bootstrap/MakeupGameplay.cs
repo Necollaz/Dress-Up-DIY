@@ -33,7 +33,7 @@ namespace _Project.Gameplay.Makeup.Boostrap
 
         private void Awake()
         {
-            _bootstrap = new MakeupGameplayBootstrap(
+            MakeupGameplayBootstrapData bootstrapData = new MakeupGameplayBootstrapData(
                 _mainCamera,
                 _makeupBookView,
                 _playerFaceStateView,
@@ -49,6 +49,7 @@ namespace _Project.Gameplay.Makeup.Boostrap
                 _lipstickSettings,
                 _eyeshadowSettings);
 
+            _bootstrap = new MakeupGameplayBootstrap(bootstrapData);
             _bootstrap.ApplyInitialState();
         }
 
